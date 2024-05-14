@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Summary</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cute+Font&family=Gamja+Flower&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="top-menu-frame">
+        <h2>Summary</h2>
+        <div class="search-img"></div>
+        <input class="search" type="text" name="검색어">
+        <button class="alarm-img"></button>
+        <button class="new-document">
+            + New Document
+        </button>
+    </div>
+
+    <div class="profile-frame">
+        <div class="proflie-img"></div>
+        <div class="proflie-category1"></div>
+        <div class="proflie-category2"></div>
+        <div class="proflie-category3"></div>
+        <div class="proflie-category4"></div>
+
+        <div class="proflie-setting-frame">
+            <button class="proflie-setting"></button>
+            <button class="proflie-trash"></button>
+        </div>
+    </div>
+
+    <div class="file-list-container">
+        <ul id="fileList"></ul>
+        <div class="modal" id="fileModal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h3 id="fileModalTitle">File Content</h3>
+                <pre id="fileContent"></pre>
+            </div>
+        </div>
+    </div>
+
+    <div class="queastion"></div>
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <h3>새 노트 만들기</h3>
+            <input type="file" id="fileInput" accept=".txt, .pdf, .docx"> <!-- 파일 업로드 input -->
+            <button id="uploadBtn">파일 업로드</button> <!-- 업로드 버튼 -->
+        </div>
+    </div>
+
+
+    <!-- 외부 JavaScript 파일 -->
+    <script src="{% static 'scripts.js' %}"></script>
+</body>
+</html>
