@@ -53,22 +53,22 @@
 
     <div class="recent-document-frame">
         <div class="recent-document-topBar-Container"> <!-- 최근 노트 상단바 -->
-            <div class="recent-document-topBar-NoteName">
+            <div class="recent-document-topBar-NoteName"> <!-- 이름 프레임 -->
                 <h2>Note Name</h2>
             </div>
-            <div class="recent-document-topBar-PostDate">
+            <div class="recent-document-topBar-PostDate"> <!-- 파일 정보 프레임 -->
                 <h2>Post Date</h2>
             </div>
         </div>
 
-        <div class="recent-document-table-Container">
-            <div class="file-list-container">
-                <div id="fileList"></div>
+        <div class="recent-document-table-Container"> <!-- 최근 노트박스 전체 컨테이너 -->
+            <div class="file-list-container"> <!-- 최근 파일 하나 컨테이너 -->
+                <ul id="fileList"></ul>
                     <div class="modal" id="fileModal">
-                        <div class="modal-content">
-                            <h3 id="fileModalTitle">File Content</h3>
+                        <div class="modal-content"> <!-- 파일 정보 -->
+                            <h3 class="file-ModalTitle" id="fileModalTitle">File Content</h3>
                             <div id="fileContent" contenteditable="true"></div>
-                            <button id="saveFileBtn">저장</button>
+                            <button class="save-btn" id="saveFileBtn">Save</button>
                         </div>
                     </div>
                 </div>
@@ -77,10 +77,11 @@
     </div>
 
     <div class="modal" id="modal">
-        <div class="modal-content">
-            <h3>새 노트 만들기</h3>
+        <div class="modal-content"> 
+            <h3>Create a new note</h3>
             <input type="file" id="fileInput" name="file" accept=".txt, .pdf, .docx"> <!--파일 선택-->
-            <button id="uploadBtn">파일 업로드</button> <!-- 업로드 버튼 -->
+            <button class="uploadBtn" id="uploadBtn">File Upload</button> <!-- 업로드 버튼 -->
+            <button class="modal-cancelBtn" id="modal-cancelBtn">Cancel</button> <!-- 취소 버튼 -->
         </div>
     </div>
 
@@ -88,6 +89,6 @@
 
 
     <!-- 외부 JavaScript 파일 -->
-    <script src="{% static 'scripts.js' %}"></script>
+    <script src="scripts.js"></script>
 </body>
 </html>
