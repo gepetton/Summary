@@ -18,26 +18,97 @@
     top: 3.75%;
 }
 
-.search-img {
+.search-box{
     position: absolute;
+    top : 18px;
+    left : 550px;
     height: 35px;
     width: 35px;
-    background: url(images/search-img.png);
-    left: 27%;
-    top: 2.1%;
-    opacity: 0.7;
+    border-radius: 50%;
+    box-shadow: 5px 5px 30px rgba(0,0,0,.2);
+    transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
-.search {
-    position: absolute;
-    left: 30%;
-    top: 2.6%;
-    height: 30px;
-    width: 550px;
-    border: solid #505050;
-    border-width: 0 0 1px;
-    font-size: 25px;
+.search-box.active{
+    width: 800px;
+}
+
+.search-box input{
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: 50px;
+    background: #fff;
     outline: none;
+    padding: 0 60px 0 20px;
+    font-size: 18px;
+    opacity: 0;
+    transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.search-box input.active{
+    opacity: 1;
+}
+
+.search-box input::placeholder{
+    color: black;
+}
+  
+.search-box .search-icon{
+    position: absolute;
+    right: 0px;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 50px;
+    width: 50px;
+    background: #2489FF;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 50px;
+    font-size: 22px;
+    color: #fff;
+    cursor: pointer;
+    z-index: 1;
+    transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.search-box .search-icon.active{
+    right: 5px;
+    height: 50px;
+    line-height: 50px;
+    width: 50px;
+    font-size: 20px;
+    background: #2489FF;
+    color: #fff;
+    transform: translateY(-50%) rotate(360deg);
+}
+  
+.search-box .cancel-icon{
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 25px;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.5s 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+  
+.search-box .cancel-icon.active{
+    right: -40px;
+    transform: translateY(-50%) rotate(360deg);
+}
+  
+.search-box .search-data{
+    text-align: center;
+    padding-top: 7px;
+    color: #fff;
+    font-size: 18px;
+    word-wrap: break-word;
+}
+  
+.search-box .search-data.active{
+    display: none;
 }
 
 .alarm-img {
@@ -58,13 +129,23 @@
     border: 0;
     border-radius: 15px;
     background-color: #2489FF;
+    right: 14%;
+    top: 10px;
+    box-shadow: 30px, 30px, 10px, rgba(0, 0, 0, 25); /*왜 안되냐*/
+    transition: all 0.3s;
+}
+
+.new-document p {
     font-family: "Gamja Flower", sans-serif;
     font-weight: 500;
     font-style: normal;
     color: #EFEFEF;
     font-size: 21px;
-    right: 14%;
-    top: 10px;
+    background: none;
+}
+
+.new-document:hover{
+    background-color:#004DFF;
 }
 
 
@@ -91,7 +172,7 @@
 }
 
 
-.proflie-category1 {
+.proflie-category-allNote {
     position: relative;
     height: 50px;
     width: 225px;
@@ -101,8 +182,7 @@
     left: 50%;
     top: 15%;
 }
-
-.proflie-category2 {
+.proflie-category-BookMark {
     position: relative;
     height: 50px;
     width: 225px;
@@ -112,8 +192,7 @@
     left: 50%;
     top: 18%;
 }
-
-.proflie-category3 {
+.proflie-category-Folder {
     position: relative;
     height: 50px;
     width: 225px;
@@ -124,25 +203,15 @@
     top: 21%;
 }
 
-.proflie-category4 {
-    position: relative;
-    height: 50px;
-    width: 225px;
-    border: 2px solid #303030;
-    border-width: 0 0 2px;
-    transform: translate(-50%, -50%);
-    left: 50%;
-    top: 24%;
-}
 
 .proflie-setting-frame {
-    position: relative;
+    position: absolute;
     height: 30px;
     width: 100%;
     border: 1px solid #505050;
     border-width: 1px 0 0 0;
     opacity: 0.8;
-    top: 42%;
+    bottom: 3%;
 }
 
 .proflie-setting {
@@ -151,29 +220,96 @@
     width: 50px;
     background: url(images/setting-img.png);
     border: none;
-    opacity: 0.9;
+    opacity: 0.8;
     left: 82%;
 }
 
 .proflie-trash {
     position: absolute;
-    height: 75px;
-    width: 75px;
+    height: 60px;
+    width: 60px;
     background: url(images/profile-trash-img.png);
     border: none;
     transform: translate(-50%, -50%);
-    left: 11%;
+    left: 10%;
     top: 85%;
+}
+
+
+
+.recent-document-frame {
+    position: absolute;
+    border: 1px solid black;
+    height: 800px;
+    width: 1100px;
+    transform: translate(-50%, -50%);
+    left: 58%;
+    top: 52.5%;
+}
+
+
+.recent-document-topBar-Container {
+    position: absolute;
+    border: 1px solid black;
+    height: 6%;
+    width: 100%;
+}
+
+.recent-document-topBar-NoteName {
+    position: absolute;
+    border: 1px solid black;
+    height: 100%;
+    width: 60%;
+}
+.recent-document-topBar-NoteName h2 {
+    position: absolute;
+    top: 13%;
+    left: 10%;
+    font-family: "Gamja Flower", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 25px;
+    color: #303030;
+}
+
+.recent-document-topBar-PostDate {
+    position: absolute;
+    border: 1px solid black;
+    height: 100%;
+    width: 40%;
+    right: 0;
+}
+.recent-document-topBar-PostDate h2{
+    position: absolute;
+    top: 13%;
+    left: 10%;
+    font-family: "Gamja Flower", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 25px;
+    color: #303030;
+}
+
+
+.recent-document-table-Container {
+    position: absolute;
+    border: 1px solid black;
+    height: 94%;
+    width: 100%;
+    bottom: 0;
 }
 
 .file-list-container {
     position: absolute;
-    top: 100px; /* 프로필과 동일한 높이로 설정 */
-    left: 550px; /* profile-frame의 우측에 위치하도록 조정 */
     padding: 10px; /* 내부 여백 설정 */
-    border: 1px solid #ccc; /* 테두리 추가 */
-    border-radius: 5px; /* 테두리 둥글게 처리 */
-    background-color: #f9f9f9; /* 배경색 설정 */
+    border: 1px solid black; /* 테두리 추가 */
+    background-color: #f8f8f8; /* 배경색 설정 */
+    border-radius: 30px;
+    height: 25%;
+    width: 95%;
+    transform: translate(-50%, -50%);
+    top: 17%;
+    left: 50%;
 }
 
 #fileList {
@@ -182,6 +318,31 @@
     margin: 0;
 }
 
+.file-box {
+    border: 1px solid #303030;
+    border-radius: 10px;
+    padding: 15px;
+    margin: 10px 0;
+    background-color: #f8f8f8;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+}
+
+.file-box:hover {
+    background-color: #e0e0e0;
+}
+
+.file-box h2 {
+    font-family: "Gamja Flower", sans-serif;
+    font-size: 20px;
+    margin: 0 0 10px 0;
+}
+
+.file-box p {
+    font-family: "Gamja Flower", sans-serif;
+    font-size: 16px;
+    margin: 0;
+}
 
 .modal {
     display: none;
@@ -196,9 +357,178 @@
 }
 
 .modal-content  {
-    margin: 15% auto; /* 화면 중앙 정렬 */
+    margin: 10% auto; /* 화면 중앙 정렬 */
     padding: 20px;
-    width: 80%;
-    border-radius: 10px;
+    height: 55%;
+    width: 40%;
+    border-radius: 20px;
     background-color: #ffffff; /* 모달 창 배경색을 하얀색으로 설정 */
 }
+
+.modal-content h3 {
+    position: relative;
+    left: 3%;
+    top: 1%;
+    background: none;
+    font-family: "Gamja Flower", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 30px;
+}
+
+.modal-content input {
+    position: relative;
+    height: 60%;
+    width: 50%;
+    left: 3%;
+    top: 3%;
+    background-color: #ececec;
+    border-radius: 20px;
+    transition: all 0.4s;
+}
+
+.modal-content input::file-selector-button {
+    display: none;
+}
+
+.modal-content input:hover {
+    background-color: #d8d8d8;
+}
+
+.queastion {
+    position: absolute;
+    background: url(images/queastion_img.png);
+    height: 74px;
+    width: 74px;
+    border: 0;
+    top: 90%;
+    left: 94%;
+    opacity: 0.7;
+}
+
+/* .recent-document-table1 {
+    position: absolute;
+    border: 1px solid black;
+    border-radius: 30px;
+    height: 25%;
+    width: 95%;
+    transform: translate(-50%, -50%);
+    top: 15%;
+    left: 50%;
+}
+.recent-document-table1 h2{
+    position: absolute;
+    top: 10%;
+    left: 5%;
+    font-family: "Gamja Flower", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 25px;
+    text-decoration: underline;
+    color: #303030;
+}
+.recent-document-table1 p {
+    position: absolute;
+    top: 45%;
+    left: 5%;
+    font-family: "Gamja Flower", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 20px;
+    color: #303030;
+}
+.recent-document-table1 h3 {
+    position: absolute;
+    top: 15%;
+    right: 5%;
+    font-family: "Gamja Flower", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 20px;
+    color: #303030;
+}
+
+.recent-document-table2 {
+    position: absolute;
+    border: 1px solid black;
+    border-radius: 30px;
+    height: 25%;
+    width: 95%;
+    transform: translate(-50%, -50%);
+    top: 45%;
+    left: 50%;
+}
+.recent-document-table2 h2 {
+    position: absolute;
+    top: 10%;
+    left: 5%;
+    font-family: "Gamja Flower", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 25px;
+    text-decoration: underline;
+    color: #303030;
+}
+.recent-document-table2 p {
+    position: absolute;
+    top: 45%;
+    left: 5%;
+    font-family: "Gamja Flower", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 20px;
+    color: #303030;
+}
+.recent-document-table2 h3 {
+    position: absolute;
+    top: 15%;
+    right: 5%;
+    font-family: "Gamja Flower", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 20px;
+    color: #303030;
+}
+
+.recent-document-table3 {
+    position: absolute;
+    border: 1px solid black;
+    border-radius: 30px;
+    height: 25%;
+    width: 95%;
+    transform: translate(-50%, -50%);
+    top: 75%;
+    left: 50%;
+}
+.recent-document-table3 h2 {
+    position: absolute;
+    top: 10%;
+    left: 5%;
+    font-family: "Gamja Flower", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 25px;
+    text-decoration: underline;
+    color: #303030;
+}
+.recent-document-table3 p {
+    position: absolute;
+    top: 45%;
+    left: 5%;
+    font-family: "Gamja Flower", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 20px;
+    color: #303030;
+}
+.recent-document-table3 h3 {
+    position: absolute;
+    top: 15%;
+    right: 5%;
+    font-family: "Gamja Flower", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 20px;
+    color: #303030;
+} */
+
