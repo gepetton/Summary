@@ -38,6 +38,27 @@ document.addEventListener('DOMContentLoaded', () => {
     const uploadBtn = document.getElementById('uploadBtn'); // 업로드 버튼
     const modalCancelBtn = document.getElementById('modal-cancelBtn'); // 취소 버튼
     const saveFileBtn = document.getElementById('saveFileBtn'); // 저장 버튼
+    const fileList = document.getElementById('fileList');
+
+    // 파일 리스트를 가져와 렌더링하는 함수
+    function loadFileList() {
+        fetch("http://localhost:8000/projectSummary/uploads/list/")
+            .then(response => response.json())
+            .then(data => {
+                fileList.innerHTML = ''; // 기존 리스트 초기화
+                data.forEach(file => {
+                    let div = document.createElement("div");
+                    div.className = "file-box";
+                    div.innerHTML = `<h2>${file.name}</h2><p>Size: ${formatFileSize(file.size)}</p>`;
+                    fileList.appendChild(div);
+                });
+            })
+            .catch(error => {
+                console.error('파일 리스트를 불러오는 중 오류 발생:', error);
+            });
+    }
+    // 페이지가 로드될 때 파일 리스트를 로드
+    loadFileList();
 
     // 새 문서 만들기 버튼 클릭 시 새 노트 모달 열기
     if (newDocumentBtn) {
@@ -46,9 +67,14 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // 모달 외부나 취소 버튼 클릭 시 파일 입력 초기화
+    const closeModal = () => {
+        fileInput.value = '';
+    };
     // 모달 외부 클릭 시 해당 모달 닫기
     window.addEventListener('click', (event) => {
         if (event.target === modal) {
+            closeModal();
             modal.style.display = 'none'; // 새 노트 모달 닫기
         } else if (event.target === fileModal) {
             fileModal.style.display = 'none'; // 파일 모달 닫기
@@ -65,14 +91,14 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // 파일 리스트 항목 클릭 시 파일 모달 열고 파일 내용 표시
-    const fileList = document.getElementById('fileList');
     if (fileList) {
         fileList.addEventListener('click', (event) => {
             if (event.target.tagName === 'DIV') {
                 const fileName = event.target.innerHTML.split("<")[1].slice(3); // 파일 이름 추출(추출 방식 변경됨)
+                console.log(fileName);
                 fileModalTitle.textContent = fileName; // 모달 제목 설정
                 // 서버에서 파일 내용을 가져오는 요청
-                fetch(`http://localhost:3000/uploads/${encodeURIComponent(fileName)}`)
+                fetch(`http://localhost:8000/projectSummary/gets/file/content/${encodeURIComponent(fileName)}/`)
                     .then(response => {
                         if (response.ok) {
                             return response.text();
@@ -90,25 +116,28 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-// 파일 저장 버튼 클릭 시 편집된 파일 내용 저장
-if (saveFileBtn) {
-    saveFileBtn.addEventListener('click', () => {
-        const fileName = fileModalTitle.textContent;
-        const editedContent = fileContentEditable.textContent; // 수정된 내용 가져오기
-
-        // JSON 형식으로 데이터 전송
-        fetch(`http://localhost:3000/uploads/${encodeURIComponent(fileName)}`, {
+    // 파일 저장 버튼 클릭 시 편집된 파일 내용 저장
+    if (saveFileBtn) {
+        saveFileBtn.addEventListener('click', () => {
+            let fileName = fileModalTitle.textContent;
+            if (fileName.endsWith('/')) {
+                fileName = fileName.slice(0, -1);
+            }
+            const editedContent = fileContentEditable.textContent; // 수정된 내용 가져오기
+            const encodedFileName = encodeURIComponent(fileName);
+            // 서버에 수정된 파일 내용을 전송
+        fetch(`http://localhost:8000/projectSummary/updates/file/content/${encodedFileName}`, {
             method: 'PUT',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'text/plain', // 수정된 내용은 텍스트로 전송
+                'X-CSRFToken': getCookie('csrftoken')
             },
-            body: JSON.stringify({ editedContent: editedContent }) // JSON 형식으로 데이터 전송
+            body: editedContent // 수정된 내용을 직접 전송
         })
         .then(response => {
             if (response.ok) { // 성공 시 동작
                 console.log('파일 저장 성공!');
-                fileModal.style.display = 'none'; // 저장 후 창 닫기(없는게 낫다면 없애도 됨.)
-                return response.json();
+                fileModal.style.display = 'none'; // 저장 후 창 닫기
             } else {
                 throw new Error('파일 저장 실패');
             }
@@ -116,18 +145,18 @@ if (saveFileBtn) {
         .catch(error => {
             console.error('파일 저장 중 오류 발생:', error);
         });
-    });
-}
-
-if (fileList) {
-        fileList.addEventListener('click', (event) => {
-            if (event.target.tagName === 'DIV') {
-                const selectedFile = event.target;
-                const parent = selectedFile.parentNode;
-                parent.prepend(selectedFile); // 선택한 파일 항목을 맨 앞으로 이동
-            }
         });
     }
+
+    if (fileList) {
+            fileList.addEventListener('click', (event) => {
+                if (event.target.tagName === 'DIV') {
+                    const selectedFile = event.target;
+                    const parent = selectedFile.parentNode;
+                    parent.prepend(selectedFile); // 선택한 파일 항목을 맨 앞으로 이동
+                }
+            });
+        }
 
 
   if (uploadBtn) {

@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
 </head>
 <body>
+
     <div class="top-menu-frame"> <!--상단 메뉴-->
         <h2>Summary</h2>
         <button class="alarm-img"></button> <!-- 알람창 기능 -->
@@ -68,7 +69,9 @@
                         <div class="modal-content"> <!-- 파일 정보 -->
                             <h3 class="file-ModalTitle" id="fileModalTitle">File Content</h3>
                             <div id="fileContent" contenteditable="true"></div>
-                            <button class="save-btn" id="saveFileBtn">Save</button>
+                            <form id="saveForm" enctype="multipart/form-data">
+                                <button class="save-btn" id="saveFileBtn">Save</button>
+                            </form>
                         </div>
                     </div>
                 </div>
