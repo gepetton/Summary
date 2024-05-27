@@ -119,9 +119,7 @@ if (saveFileBtn) {
     });
 }
 
-
-    // 파일 리스트 항목 맨 앞으로 이동하는 기능
-    if (fileList) {
+if (fileList) {
         fileList.addEventListener('click', (event) => {
             if (event.target.tagName === 'DIV') {
                 const selectedFile = event.target;
@@ -131,43 +129,63 @@ if (saveFileBtn) {
         });
     }
 
-    if (uploadBtn) {
-        uploadBtn.addEventListener('click', () => {
-            if (fileInput && fileInput.files && fileInput.files.length > 0) {
-                let file = fileInput.files[0]; // 선택된 파일 가져오기
-                const formData = new FormData();
-                formData.append('file', file); // FormData에 파일 추가
 
-                // 파일 업로드 요청 보내기
-                fetch('http://localhost:3000/uploads', {
-                    method: 'POST',
-                    body: formData
-                })
-                .then(response => {
-                    if (response.ok) {
-                        console.log('파일 업로드 성공!');
-                        // 업로드 성공 시 추가적인 동작 수행 (리스트에 파일 추가 등)
-                        let div = document.createElement('DIV');
-                        div.className = 'file-box';
-                        div.innerHTML = `
-                            <h2>${file.name}</h2>
-                            <p>Size: ${formatFileSize(file.size)}</p>
-                        `; // 파일 이름, 파일 사이즈 정보
-                        fileList.appendChild(div);
-                        modal.style.display = 'none'; // 업로드 후 모달 닫기
-                    } else {
-                        throw new Error('파일 업로드 실패');
-                    }
-                })
-                .catch(error => {
-                    console.error('파일 업로드 중 오류 발생:', error);
-                });
-            } else {
-                console.error('파일이 선택되지 않았습니다.');
+  if (uploadBtn) {
+    uploadBtn.addEventListener("click", () => {
+      if (fileInput && fileInput.files && fileInput.files.length > 0) {
+        let file = fileInput.files[0]; // 선택된 파일 가져오기
+        const formData = new FormData();
+        formData.append("file", file); // FormData에 파일 추가
+
+        // 파일 업로드 요청 보내기
+        fetch("http://localhost:8000/projectSummary/uploads/", {
+          method: "POST",
+          headers: {
+            "X-CSRFToken": getCookie("csrftoken")
+          },
+          body: formData,
+        })
+          .then((response) => {
+            if (response.ok) {
+              return response.json();
             }
-        });
-    }
+            throw new Error("파일 업로드 실패");
+          })
+          .then((data) => {
+            if (data.message) {
+                console.log(data.message);
+                let div = document.createElement("div");
+                div.className = "file-box";
+                div.innerHTML = `<h2>${file.name}</h2><p>Size: ${formatFileSize(file.size)}</p>`;
+                fileList.appendChild(div);
+            } else {
+                console.error(data.error);
+               }
+          })
+          .catch((error) => {
+            console.error("파일 업로드 중 오류 발생:", error);
+          });
+      } else {
+        console.error("파일이 선택되지 않았습니다.");
+      }
+    });
+  }
 });
+
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== "") {
+        const cookies = document.cookie.split(";");
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + "=")) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
 
 function formatFileSize(bytes) {
     const kb = bytes / 1024;

@@ -77,11 +77,16 @@
     </div>
 
     <div class="modal" id="modal">
-        <div class="modal-content"> 
-            <h3>Create a new note</h3>
-            <input type="file" id="fileInput" name="file" accept=".txt, .pdf, .docx"> <!--파일 선택-->
-            <button class="uploadBtn" id="uploadBtn">File Upload</button> <!-- 업로드 버튼 -->
-            <button class="modal-cancelBtn" id="modal-cancelBtn">Cancel</button> <!-- 취소 버튼 -->
+
+        <div class="modal-content">
+            <h3>새 노트 만들기</h3>
+            <form id="uploadForm" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input type="file" id="fileInput" name="file" accept=".txt, .pdf, .docx"> <!--파일 선택-->
+                <button type="button" id="uploadBtn">파일 업로드</button> <!-- 업로드 버튼 -->
+                <button class="modal-cancelBtn" id="modal-cancelBtn">Cancel</button> <!-- 취소 버튼 -->
+            </form>
+
         </div>
     </div>
 
@@ -89,6 +94,6 @@
 
 
     <!-- 외부 JavaScript 파일 -->
-    <script src="scripts.js"></script>
+    <script src="{% static 'scripts.js' %}"></script>
 </body>
 </html>
