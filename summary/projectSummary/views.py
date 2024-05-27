@@ -5,6 +5,8 @@ import os
 from django.conf import settings
 from django.core.files.storage import default_storage
 from django.core.files.base import ContentFile
+from django.views.decorators.http import require_http_methods
+from urllib.parse import unquote
 # Create your views here.
 
 def index(request):
@@ -34,3 +36,26 @@ def list_files(request):
                 'size': os.path.getsize(file_path),
             })
     return JsonResponse(file_list, safe=False)
+
+@require_http_methods(['GET'])
+def get_file_content(request, filename):
+    decoded_filename = unquote(filename)  # URL 디코딩
+    file_path = os.path.join(settings.MEDIA_ROOT, decoded_filename)
+    if os.path.exists(file_path):
+        with open(file_path, 'r', encoding='utf-8') as file:
+            content = file.read()
+        return HttpResponse(content, content_type='text/plain')
+    return JsonResponse({'error': '파일을 찾을 수 없습니다.'}, status=404)
+
+
+@require_http_methods(['PUT'])
+def update_file_content(request, filename):
+
+    decoded_filename = unquote(filename)  # URL 디코딩
+    file_path = os.path.join(settings.MEDIA_ROOT, decoded_filename)
+    if os.path.exists(file_path):
+        edited_content = request.body.decode('utf-8')  # 요청 본문에서 수정된 내용 가져오기
+        with open(file_path, 'w', encoding='utf-8') as file:
+            file.write(edited_content)  # 수정된 내용으로 파일 덮어쓰기
+        return JsonResponse({'success': True, 'message': '파일 내용이 업데이트되었습니다.'})
+    return JsonResponse({'success': False, 'error': '파일을 찾을 수 없습니다.'}, status=404)
