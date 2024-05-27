@@ -20,3 +20,17 @@ def upload_file(request):
         path = default_storage.save(file_path, ContentFile(uploaded_file.read()))
         return JsonResponse({'message': '파일이 업로드되었습니다.'})
     return JsonResponse({'error': '잘못된 요청입니다.'}, status=400)
+
+def list_files(request):
+    file_list = []
+    for filename in os.listdir(settings.MEDIA_ROOT):
+        # 숨김파일 표시 안되게끔
+        if filename == '.DS_Store':
+            continue
+        file_path = os.path.join(settings.MEDIA_ROOT, filename)
+        if os.path.isfile(file_path):
+            file_list.append({
+                'name': filename,
+                'size': os.path.getsize(file_path),
+            })
+    return JsonResponse(file_list, safe=False)
