@@ -129,6 +129,7 @@ if (fileList) {
         });
     }
 
+
   if (uploadBtn) {
     uploadBtn.addEventListener("click", () => {
       if (fileInput && fileInput.files && fileInput.files.length > 0) {
