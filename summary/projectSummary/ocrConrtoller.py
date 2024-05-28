@@ -3,7 +3,7 @@ import requests
 import uuid
 import time
 import json
-import secret
+from . import secret
 
 api_url = secret.ocr_Api_url
 secret_key = secret.ocr_Api_key

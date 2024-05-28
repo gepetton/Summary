@@ -1,6 +1,5 @@
 import openai
-import secret
-
+from . import secret
 # OpenAI API 키 설정 (개인 키를 사용해야 합니다)
 openai.api_key = secret.gpt_Api_key
 

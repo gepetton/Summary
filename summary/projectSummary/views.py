@@ -7,9 +7,10 @@ from django.core.files.storage import default_storage
 from django.core.files.base import ContentFile
 from django.views.decorators.http import require_http_methods
 from urllib.parse import unquote
-from gptConvert import summarize_and_generate
-from ocrConrtoller import ocr_image
-from sttController import transcribe_audio
+from .models import ConversionResult
+from .gptConvert import summarize_and_generate
+from .ocrConrtoller import ocr_image
+from .sttController import transcribe_audio
 # Create your views here.
 
 def index(request):

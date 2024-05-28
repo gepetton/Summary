@@ -2,10 +2,10 @@
 import os
 import io
 from google.cloud import speech
-import secret
+from . import secret
 
 # Google Cloud 인증 키 파일 설정
-os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = secret.gcloud_credentials_path
+#os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = secret.gcloud_credentials_path
 
 def transcribe_audio(file_path, language='ko-KR'):
     """Google Cloud Speech-to-Text API를 사용하여 오디오 파일을 텍스트로 변환"""
