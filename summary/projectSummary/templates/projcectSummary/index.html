@@ -82,14 +82,28 @@
     <div class="modal" id="modal">
 
         <div class="modal-content">
-            <h3>새 노트 만들기</h3>
-            <form id="uploadForm" enctype="multipart/form-data">
+            <h3>Create a new note</h3>
+
+            <form class="uploadForm" id="uploadForm" enctype="multipart/form-data">
                 {% csrf_token %}
                 <input type="file" id="fileInput" name="file" accept=".txt, .pdf, .docx"> <!--파일 선택-->
-                <button type="button" id="uploadBtn">파일 업로드</button> <!-- 업로드 버튼 -->
-                <button class="modal-cancelBtn" id="modal-cancelBtn">Cancel</button> <!-- 취소 버튼 -->
             </form>
 
+            <div class="OCRBtn-Container"> <!-- OCR버튼 컨테이너 -->
+                <button class="OCRBtn-Name" id="OCRBtn">OCR</button> <!-- id OCRBtn으로 통일 -> 눌렸을 때 기능 구현 해야함 -->
+                <button class="OCRBtn-Type" id="OCRBtn">jpg, png, .... Select an image file</button>
+            </div>
+            <div class="STTBtn-Container"> <!-- STT버튼 컨테이너 -->
+                <button class="STTBtn-Name" id="STTBtn">STT</button> <!-- id STTBtn으로 통일 -> 눌렸을 때 기능 구현 해야함 -->
+                <button class="STTBtn-Type" id="STTBtn">mp3, wav, .... Select an audio file</button>
+            </div>
+            <div class="GPTBtn-Container"> <!-- GPT버튼 컨테이너 -->
+                <button class="GPTBtn-Name" id="GPTBtn">GPT</button> <!-- id GPTBtn으로 통일 -> 눌렸을 때 기능 구현 해야함 -->
+                <button class="GPTBtn-Type" id="GPTBtn">jpg, png, .... Select an image or note file</button>
+            </div>
+
+            <button class="uploadBtn" type="button" id="uploadBtn">File Upload</button> <!-- 업로드 버튼 -->
+            <button class="modal-cancelBtn" id="modal-cancelBtn">Cancel</button> <!-- 취소 버튼 -->
         </div>
     </div>
 

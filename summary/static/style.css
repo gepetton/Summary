@@ -231,8 +231,8 @@
     background: url(images/profile-trash-img.png);
     border: none;
     transform: translate(-50%, -50%);
-    left: 10%;
-    top: 85%;
+    left: 7%;
+    top: 70%;
 }
 
 
@@ -351,6 +351,16 @@
     background: none;
 }
 
+.file-box-delete {
+    position: absolute;
+    background: url(images/delete-img.png);
+    height: 20px;
+    width: 20px;
+    left: 94%;
+    top: 40%;
+    border: 0;
+}
+
 .modal {
     display: none;
     position: fixed;
@@ -383,18 +393,26 @@
     font-size: 30px;
 }
 
-.modal-content input { /*파일 선택 박스*/
+.uploadForm {
     position: relative;
     height: 60%;
     width: 50%;
     left: 3%;
     top: 3%;
+    border-radius: 20px;
+}
+
+
+.modal-content input { /*파일 선택 박스*/
+    position: relative;
+    height: 100%;
+    width: 100%;
     background-color: #ececec;
     border-radius: 20px;
     transition: all 0.4s;
 }
 
-.modal-content input::file-selector-button { /*모달 파일 선택 버튼 제거*/
+.uploadForm input::file-selector-button { /*모달 파일 선택 버튼 제거*/
     display: none;
 }
 
@@ -402,14 +420,123 @@
     background-color: #d8d8d8;
 }
 
+.OCRBtn-Container {
+    position: relative;
+    background-color: #f5f5f5;
+    height: 100px;
+    width: 300px;
+    border: 0;
+    border-radius: 10px;
+    left: 57.5%;
+    top: -57%;
+}
+.OCRBtn-Name {
+    position: absolute;
+    background: none;
+    height: 100%;
+    width: 30%;
+    border-width: 0 1px 0 0;
+
+    font-family: "Gamja Flower", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 25px;
+}
+.OCRBtn-Type {
+    position: absolute;
+    background: none;
+    height: 100%;
+    width: 70%;
+    border: 0;
+    left: 30%;
+
+    font-family: "Gamja Flower", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 18px;
+}
+
+.STTBtn-Container {
+    position: relative;
+    background-color: #f5f5f5;
+    height: 100px;
+    width: 300px;
+    border: 0;
+    border-radius: 10px;
+    left: 57.5%;
+    top: -56%;
+}
+.STTBtn-Name {
+    position: absolute;
+    background: none;
+    height: 100%;
+    width: 30%;
+    border-width: 0 1px 0 0;
+
+    font-family: "Gamja Flower", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 25px;
+}
+.STTBtn-Type {
+    position: absolute;
+    background: none;
+    height: 100%;
+    width: 70%;
+    border: 0;
+    left: 30%;
+
+    font-family: "Gamja Flower", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 18px;
+}
+
+.GPTBtn-Container {
+    position: relative;
+    background-color: #f5f5f5;
+    height: 100px;
+    width: 300px;
+    border: 0;
+    border-radius: 10px;
+    left: 57.5%;
+    top: -55%;
+}
+.GPTBtn-Name {
+    position: absolute;
+    background: none;
+    height: 100%;
+    width: 30%;
+    border-width: 0 1px 0 0;
+
+    font-family: "Gamja Flower", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 25px;
+}
+.GPTBtn-Type {
+    position: absolute;
+    background: none;
+    height: 100%;
+    width: 70%;
+    border: 0;
+    left: 30%;
+
+    font-family: "Gamja Flower", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 18px;
+}
+
+
 .uploadBtn { /*업로드 버튼*/
     position: relative;
     height: 50px;
     width: 100px;
     border: 0;
     border-radius: 5px;
-    left: 35%;
-    top: 80%;
+    left: 83%;
+    top: -34%;
 
     font-family: "Gamja Flower", sans-serif;
     font-weight: 500;
@@ -431,8 +558,8 @@
     width: 100px;
     border: 0;
     border-radius: 5px;
-    left: 7%;
-    top: 80%;
+    left: 55%;
+    top: -34%;
 
     font-family: "Gamja Flower", sans-serif;
     font-weight: 500;
@@ -460,15 +587,15 @@
     font-family: "Gamja Flower", sans-serif;
     font-weight: 500;
     font-style: normal;
-    color: #3f3f3f;
+    color: #EFEFEF;
     font-size: 18px;
     
-    background-color: #ececec;
+    background-color: #2489FF;
     transition: all 0.3s;
 }
 
 .save-btn:hover {
-    background-color: #cecece;
+    background-color: #004DFF;
 }
 
 .queastion {

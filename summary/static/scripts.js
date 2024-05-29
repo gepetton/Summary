@@ -27,6 +27,7 @@ cancelBtn.onclick =()=>{
     searchData.classList.toggle("active");
     searchInput.value = "";
 }
+console.log(getCookie('csrftoken'));
 
 document.addEventListener('DOMContentLoaded', () => {
     const newDocumentBtn = document.querySelector('.new-document');
@@ -47,9 +48,13 @@ document.addEventListener('DOMContentLoaded', () => {
             .then(data => {
                 fileList.innerHTML = ''; // 기존 리스트 초기화
                 data.forEach(file => {
+                    var html = "";  // 문자열 저장 방식으로 변경
                     let div = document.createElement("div");
                     div.className = "file-box";
-                    div.innerHTML = `<h2>${file.name}</h2><p>Size: ${formatFileSize(file.size)}</p>`;
+                    html += "<h2>" + file.name + "</h2>"; 
+                    html += "<p>Size:" + formatFileSize(file.size) + "</p>";
+                    html += "<button class=file-box-delete></button>"; // !!! 삭제 버튼 추가. 기능 구현해야함
+                    div.innerHTML = html;  // 후에 한 번에 합치는 형식으로 변경
                     fileList.appendChild(div);
                 });
             })
@@ -182,11 +187,18 @@ document.addEventListener('DOMContentLoaded', () => {
           })
           .then((data) => {
             if (data.message) {
+                var html = ""; // 문자열 저장 방식으로 변경
                 console.log(data.message);
                 let div = document.createElement("div");
+                html += "<h2>" + file.name + "</h2>"; 
+                html += "<p>Size:" + formatFileSize(file.size) + "</p>";
+                html += "<button class=file-box-delete></button>"; // !!! 삭제 버튼 추가. 기능 구현해야함
                 div.className = "file-box";
-                div.innerHTML = `<h2>${file.name}</h2><p>Size: ${formatFileSize(file.size)}</p>`;
+                div.innerHTML = html; // 후에 한 번에 합치는 형식으로 변경
+                // 그 전 코드
+                // div.innerHTML =`<h2>${file.name}</h2><p>Size: ${formatFileSize(file.size)}</p><button class=>file-box-delete</button>`;
                 fileList.appendChild(div);
+                modal.style.display == 'none';
             } else {
                 console.error(data.error);
                }
