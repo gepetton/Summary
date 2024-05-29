@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse, JsonResponse, HttpResponseBadRequest
 from django.views.decorators.csrf import csrf_exempt
 import os
 from django.conf import settings
@@ -7,6 +7,10 @@ from django.core.files.storage import default_storage
 from django.core.files.base import ContentFile
 from django.views.decorators.http import require_http_methods
 from urllib.parse import unquote
+from .models import ConversionResult
+from .gptConvert import summarize_and_generate
+from .ocrConrtoller import ocr_image
+from .sttController import transcribe_audio
 # Create your views here.
 
 def index(request):
@@ -59,3 +63,46 @@ def update_file_content(request, filename):
             file.write(edited_content)  # 수정된 내용으로 파일 덮어쓰기
         return JsonResponse({'success': True, 'message': '파일 내용이 업데이트되었습니다.'})
     return JsonResponse({'success': False, 'error': '파일을 찾을 수 없습니다.'}, status=404)
+
+@csrf_exempt
+def gpt_conversion(request):
+    if request.method == 'POST':
+        prompt = request.POST.get('prompt')
+        if prompt:
+            result = summarize_and_generate(prompt)
+            return JsonResponse({'response': result})
+        else:
+            return HttpResponseBadRequest('프롬프트가 없습니다.')
+    return HttpResponseBadRequest('잘못된 요청입니다.')
+
+@csrf_exempt
+def ocr_conversion(request):
+    if request.method == 'POST':
+        file = request.FILES.get('file')
+        if file:
+            file_path = default_storage.save(f'uploads/{file.name}', file)
+
+            # OCR 변환
+            full_file_path = default_storage.path(file_path)
+            result = ocr_image(full_file_path)
+
+            return JsonResponse({'text': result})
+        else:
+            return HttpResponseBadRequest('파일이 없습니다.')
+    return HttpResponseBadRequest('잘못된 요청입니다.')
+
+@csrf_exempt
+def stt_conversion(request):
+    if request.method == 'POST':
+        file = request.FILES.get('file')
+        if file:
+            file_path = default_storage.save(f'uploads/{file.name}', file)
+
+            # STT 변환
+            full_file_path = default_storage.path(file_path)
+            result = transcribe_audio(full_file_path)
+
+            return JsonResponse({'transcript': result})
+        else:
+            return HttpResponseBadRequest('파일이 없습니다.')
+    return HttpResponseBadRequest('잘못된 요청입니다.')

@@ -1,42 +1,30 @@
+# sttController.py
+import os
+import io
 from google.cloud import speech
+from . import secret
 
-def run_quickstart():
-    # [START speech_quickstart]
-    import io
-    import os
+# Google Cloud 인증 키 파일 설정
+#os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = secret.gcloud_credentials_path
 
-    # Imports the Google Cloud client library
-    # [START migration_import]
-    # [END migration_import]
-
-    # Instantiates a client
-    # [START migration_client]
+def transcribe_audio(file_path, language='ko-KR'):
+    """Google Cloud Speech-to-Text API를 사용하여 오디오 파일을 텍스트로 변환"""
     client = speech.SpeechClient()
-    # [END migration_client]
 
-    # The name of the audio file to transcribe
-    file_name = os.path.join(
-        os.path.dirname(__file__),
-        '.',
-        'voice.wav')
-
-    # Loads the audio into memory
-    with io.open(file_name, 'rb') as audio_file:
+    with io.open(file_path, 'rb') as audio_file:
         content = audio_file.read()
         audio = speech.RecognitionAudio(content=content)
 
     config = speech.RecognitionConfig(
         encoding=speech.RecognitionConfig.AudioEncoding.LINEAR16,
         sample_rate_hertz=16000,
-        language_code='ko-KR')
+        language_code=language
+    )
 
-    # Detects speech in the audio file
-    response = client.recognize(config, audio)
+    response = client.recognize(config=config, audio=audio)
 
+    transcripts = []
     for result in response.results:
-        print('Transcript: {}'.format(result.alternatives[0].transcript))
-    # [END speech_quickstart]
+        transcripts.append(result.alternatives[0].transcript)
 
-
-if __name__ == '__main__':
-    run_quickstart()
+    return ' '.join(transcripts)
