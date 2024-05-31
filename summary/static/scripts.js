@@ -40,7 +40,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const modalCancelBtn = document.getElementById('modal-cancelBtn'); // 취소 버튼
     const saveFileBtn = document.getElementById('saveFileBtn'); // 저장 버튼
     const fileList = document.getElementById('fileList');
-
+    const gptBtnName = document.getElementById('GPTBtnName'); // GPT 버튼
+    const ocrBtnName = document.getElementById('OCRBtnName'); // OCR 버튼
+    const sttBtnName = document.getElementById('STTBtnName'); // STT 버튼
     // 파일 리스트를 가져와 렌더링하는 함수
     function loadFileList() {
         fetch("http://localhost:8000/projectSummary/uploads/list/")
@@ -51,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     var html = "";  // 문자열 저장 방식으로 변경
                     let div = document.createElement("div");
                     div.className = "file-box";
-                    html += "<h2>" + file.name + "</h2>"; 
+                    html += "<h2>" + file.name + "</h2>";
                     html += "<p>Size:" + formatFileSize(file.size) + "</p>";
                     html += "<button class=file-box-delete></button>"; // !!! 삭제 버튼 추가. 기능 구현해야함
                     div.innerHTML = html;  // 후에 한 번에 합치는 형식으로 변경
@@ -164,6 +166,87 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
 
+    gptBtnName.addEventListener('click', () => {
+        const formData = new FormData(document.getElementById('uploadForm'));
+        fetch('http://localhost:8000/projectSummary/gpt/conversion/', {
+            method: 'POST',
+            headers: {
+                'X-CSRFToken': getCookie('csrftoken'),
+            },
+            body: formData,
+        })
+        .then(response => response.json())
+        .then(data => {
+            // 성공적으로 처리되었을 경우 모달 닫기
+            fileModal.style.display = 'none';
+            console.log('GPT 처리 성공:', data);
+            alert('파일에 있는 내용을 요약했습니다.');
+
+        })
+        .catch(error => {
+            console.error('GPT 처리 중 오류 발생:', error);
+        });
+    })
+
+    // OCR 버튼 클릭 시 OCR 처리를 수행하는 함수
+    ocrBtnName.addEventListener('click', () => {
+        const formData = new FormData(document.getElementById('uploadForm'));
+        fetch('http://localhost:8000/projectSummary/ocr/conversion/', {
+            method: 'POST',
+            headers: {
+                'X-CSRFToken': getCookie('csrftoken'),
+            },
+            body: formData,
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.message) {
+                // 성공적으로 처리되었을 경우 모달 닫기
+                modal.style.display = 'none';
+                console.log('OCR 처리 성공:', data);
+                alert('이미지에서 텍스트를 추출했습니다.');
+
+            } else {
+                console.error(data.error);
+                alert('OCR 처리 실패: ' + data.error);
+            }
+        })
+        .catch(error => {
+            console.error('OCR 처리 중 오류 발생:', error);
+            alert('OCR 처리 중 오류가 발생했습니다.');
+        });
+    });
+
+    // STT 버튼 클릭 시 STT 변환을 수행하는 함수
+    sttBtnName.addEventListener('click', () => {
+        const formData = new FormData(document.getElementById('uploadForm'));
+        fetch('http://localhost:8000/projectSummary/stt/conversion/', {
+            method: 'POST',
+            headers: {
+                'X-CSRFToken': getCookie('csrftoken'),
+            },
+            body: formData,
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.transcript) {
+                // 성공적으로 변환이 완료된 경우
+                modal.style.display = 'none'; // 모달 닫기
+                console.log('STT 변환 성공:', data.transcript);
+                // 여기서 변환된 텍스트를 어떻게 처리할지에 대한 로직을 추가할 수 있습니다.
+                alert('오디오에서 텍스트를 추출했습니다.');
+            } else {
+                // 변환이 실패한 경우
+                console.error(data.error);
+                alert('STT 변환 실패: ' + data.error);
+            }
+        })
+        .catch(error => {
+            console.error('STT 변환 중 오류 발생:', error);
+            alert('STT 변환 중 오류가 발생했습니다.');
+        });
+    });
+
   if (uploadBtn) {
     uploadBtn.addEventListener("click", () => {
       if (fileInput && fileInput.files && fileInput.files.length > 0) {
@@ -190,7 +273,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 var html = ""; // 문자열 저장 방식으로 변경
                 console.log(data.message);
                 let div = document.createElement("div");
-                html += "<h2>" + file.name + "</h2>"; 
+                html += "<h2>" + file.name + "</h2>";
                 html += "<p>Size:" + formatFileSize(file.size) + "</p>";
                 html += "<button class=file-box-delete></button>"; // !!! 삭제 버튼 추가. 기능 구현해야함
                 div.className = "file-box";
