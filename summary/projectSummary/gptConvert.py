@@ -27,9 +27,9 @@ def summarize_and_generate(input_text):
         return "오류 발생"
 
 
-# 테스트를 위한 입력 텍스트
-input_text =  input()
-
-# 입력 텍스트 요약 및 추가 내용 생성 함수 호출
-result = summarize_and_generate(input_text)
-print("요약 및 추가 내용:", result)
+#테스트를 위한 입력 텍스트
+# input_text =  input()
+#
+# # 입력 텍스트 요약 및 추가 내용 생성 함수 호출
+# result = summarize_and_generate(input_text)
+# print("요약 및 추가 내용:", result)
