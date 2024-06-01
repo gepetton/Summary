@@ -64,45 +64,110 @@ def update_file_content(request, filename):
         return JsonResponse({'success': True, 'message': '파일 내용이 업데이트되었습니다.'})
     return JsonResponse({'success': False, 'error': '파일을 찾을 수 없습니다.'}, status=404)
 
+
 @csrf_exempt
 def gpt_conversion(request):
-    if request.method == 'POST':
-        prompt = request.POST.get('prompt')
-        if prompt:
-            result = summarize_and_generate(prompt)
-            return JsonResponse({'response': result})
-        else:
-            return HttpResponseBadRequest('프롬프트가 없습니다.')
-    return HttpResponseBadRequest('잘못된 요청입니다.')
+    if request.method == 'POST' and request.FILES.get('file'):
+        uploaded_file = request.FILES['file']
+        file_name = uploaded_file.name
+        file_path = os.path.join(settings.MEDIA_ROOT, file_name)
+
+        # 파일 저장
+        saved_path = default_storage.save(file_path, ContentFile(uploaded_file.read()))
+
+        try:
+            # 저장된 파일 경로 재확인
+            absolute_file_path = os.path.join(settings.MEDIA_ROOT, saved_path)
+
+            with open(absolute_file_path, 'r') as file:
+                file_content = file.read()
+
+            # 변환 작업 수행
+            transformed_content = summarize_and_generate(file_content)
+
+            # 변환된 내용을 기존 파일에 덮어쓰기
+            with open(absolute_file_path, 'w') as file:
+                file.write(transformed_content)
+
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=500)
+
+        return JsonResponse({'message': '파일 변환 및 업데이트 성공', 'content': transformed_content})
+
+    return JsonResponse({'error': 'Invalid request method or no file uploaded'}, status=400)
 
 @csrf_exempt
 def ocr_conversion(request):
-    if request.method == 'POST':
-        file = request.FILES.get('file')
-        if file:
-            file_path = default_storage.save(f'uploads/{file.name}', file)
+    if request.method == 'POST' and request.FILES.get('file'):
+        uploaded_file = request.FILES['file']
+        file_name = uploaded_file.name
+        file_path = os.path.join(settings.MEDIA_ROOT, file_name)
 
-            # OCR 변환
-            full_file_path = default_storage.path(file_path)
-            result = ocr_image(full_file_path)
+        # 파일 저장
+        saved_path = default_storage.save(file_path, ContentFile(uploaded_file.read()))
+        absolute_saved_path = os.path.join(settings.MEDIA_ROOT, saved_path)
+        try:
+            # OCR 처리
+            extracted_text = ocr_image(absolute_saved_path)
+            # 추출한 텍스트 요약
+            result_text = summarize_and_generate(extracted_text)
+            # 기존 이미지 파일 삭제
+            if os.path.exists(absolute_saved_path):
+                os.remove(absolute_saved_path)
 
-            return JsonResponse({'text': result})
-        else:
-            return HttpResponseBadRequest('파일이 없습니다.')
-    return HttpResponseBadRequest('잘못된 요청입니다.')
+            # 추출된 텍스트를 같은 이름의 파일로 저장
+            text_file_path = os.path.join(settings.MEDIA_ROOT, f"{os.path.splitext(uploaded_file.name)[0]}.txt")
+            with open(text_file_path, 'w') as text_file:
+                text_file.write(result_text)
+
+            return JsonResponse({'message': 'OCR 처리 성공', 'file_path': text_file_path})
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=500)
+    return JsonResponse({'error': 'Invalid request'}, status=400)
 
 @csrf_exempt
 def stt_conversion(request):
-    if request.method == 'POST':
-        file = request.FILES.get('file')
-        if file:
-            file_path = default_storage.save(f'uploads/{file.name}', file)
+    if request.method == 'POST' and request.FILES.get('file'):
+        uploaded_file = request.FILES['file']
+        file_name = uploaded_file.name
+        file_path = os.path.join(settings.MEDIA_ROOT, file_name)
 
-            # STT 변환
-            full_file_path = default_storage.path(file_path)
-            result = transcribe_audio(full_file_path)
+        # 파일 저장
+        saved_path = default_storage.save(file_path, ContentFile(uploaded_file.read()))
+        absolute_saved_path = os.path.join(settings.MEDIA_ROOT, saved_path)
 
-            return JsonResponse({'transcript': result})
-        else:
-            return HttpResponseBadRequest('파일이 없습니다.')
-    return HttpResponseBadRequest('잘못된 요청입니다.')
+        try:
+            # STT 변환 수행
+            extracted_text = transcribe_audio(absolute_saved_path)
+            result = summarize_and_generate(extracted_text)
+            # 기존 오디오 파일 삭제
+            if os.path.exists(absolute_saved_path):
+                os.remove(absolute_saved_path)
+
+            # 변환된 텍스트를 같은 이름의 파일로 저장
+            text_file_path = os.path.join(settings.MEDIA_ROOT, f"{os.path.splitext(uploaded_file.name)[0]}.txt")
+            with open(text_file_path, 'w') as text_file:
+                text_file.write(result)
+
+            return JsonResponse({'message': 'STT 처리 성공', 'file_path': text_file_path})
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=500)
+
+    return JsonResponse({'error': 'Invalid request method or no file uploaded'}, status=400)
+
+
+# @csrf_exempt
+# def stt_conversion(request):
+#     if request.method == 'POST':
+#         file = request.FILES.get('file')
+#         if file:
+#             file_path = default_storage.save(f'uploads/{file.name}', file)
+#
+#             # STT 변환
+#             full_file_path = default_storage.path(file_path)
+#             result = transcribe_audio(full_file_path)
+#
+#             return JsonResponse({'transcript': result})
+#         else:
+#             return HttpResponseBadRequest('파일이 없습니다.')
+#     return HttpResponseBadRequest('잘못된 요청입니다.')
