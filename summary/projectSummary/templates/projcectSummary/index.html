@@ -6,10 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Summary</title>
     <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cute+Font&family=Gamja+Flower&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+
 </head>
 <body>
 
@@ -42,9 +48,34 @@
 
     <div class="profile-frame"> <!-- 프로필 창 프레임-->
         <div class="proflie-img"></div> <!-- 프로필 이미지 -->
-        <button class="proflie-category-allNote"></button> <!-- 전체폴더, 북마크, 개인이 작성한 폴더 등의 요소들 -->
-        <button class="proflie-category-BookMark"></button>
-        <button class="proflie-category-Folder"></button>
+        <div class="profile-category-Notes-frame">
+            <h3 class="font-E">Notes</h3>
+        </div>
+
+        <button class="proflie-category-allNote">
+            <div class="profile-category-allNote-img"></div>
+            <h3 class="font-E">Full notes</h3>
+        </button> <!-- 전체폴더, 북마크, 개인이 작성한 폴더 등의 요소들 -->
+
+        <button class="proflie-category-Bookmark">
+            <div class="profile-category-Bookmark-img"></div>
+            <h3 class="font-E">Bookmark</h3>
+        </button>
+
+
+        <div class="profile-category-Folder-frame">
+            <h3 class="font-E">Folders</h3>
+            <button class="profile-category-newFolderBnt">
+                <svg class="newFolderPlus" width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="3" y="9" width="14" height="2" fill="gray" />
+                    <rect x="9" y="3" width="2" height="14" fill="gray" />
+                </svg>
+            </button>
+        </div>
+        <button class="proflie-category-default-Folder-frame">
+            <div class="proflie-category-default-Folder-frame-default-folder-img"></div>
+            <h3 class="font-E">Default folder</h3>
+        </button>
 
         <div class="proflie-setting-frame"> <!-- 설정창과 휴지통 기능 -->
             <button class="proflie-setting"></button>
@@ -54,10 +85,10 @@
 
     <div class="recent-document-frame">
         <div class="recent-document-topBar-Container"> <!-- 최근 노트 상단바 -->
-            <div class="recent-document-topBar-NoteName"> <!-- 이름 프레임 -->
+            <div class="recent-document-topBar-NoteName font-E"> <!-- 이름 프레임 -->
                 <h2>Note Name</h2>
             </div>
-            <div class="recent-document-topBar-PostDate"> <!-- 파일 정보 프레임 -->
+            <div class="recent-document-topBar-PostDate font-E"> <!-- 파일 정보 프레임 -->
                 <h2>Post Date</h2>
             </div>
         </div>

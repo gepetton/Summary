@@ -1,21 +1,34 @@
 * {
     margin: 0;
     padding: 0;
-    background-color: #f7f7f7;
+    background-color: #fff;
+}
+
+body {
+    height: 100%;
+    overflow: hidden; /* 스크롤 없앰 */
+}
+
+.font-E {
+    font-family: "Mulish", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: lighter;
+    font-style: normal;
 }
 
 .top-menu-frame {
-    height: 70px;
+    position: absolute;
+    height: 7vh;
     width: 100%;
-    border: solid #505050;
+    border: solid #d3d5d8;
     border-width: 0 0 1px;
 }
 
 .top-menu-frame h2 {
     position: absolute;
     transform: translate(-50%, -50%);
-    left: 15%;
-    top: 3.75%;
+    left: 290px;
+    top: 50%;
     color: #2489FF;
 }
 
@@ -114,12 +127,13 @@
 
 .alarm-img {
     position: absolute;
-    height: 40px;
-    width: 40px;
-    right: 23%;
-    top: 1.8%;
+    height: 25px;
+    width: 25px;
+    transform: translate(-50%, -50%);
+    left: calc(15vh + 300px + 1325px - 180px);
+    top: 50%;
     border: none;
-    background: url(images/alarm-img.png);
+    background: url(images/alarm-img1.png);
     opacity: 0.9;
 }
 
@@ -130,8 +144,9 @@
     border: 0;
     border-radius: 15px;
     background-color: #2489FF;
-    right: 14%;
-    top: 10px;
+    left: calc(15vh + 300px + 1325px - 72.5px);
+    top: 50%;
+    transform: translate(-50%, -50%);
     box-shadow: 30px, 30px, 10px, rgba(0, 0, 0, 25); /*왜 안되냐*/
     transition: all 0.3s;
 }
@@ -152,13 +167,14 @@
 
 .profile-frame {
     position: absolute;
-    height: 800px;
+    height: calc(100vh - 7vh);
     width: 300px;
-    background-color: #ececec;
-    border: 2px solid #303030;
-    border-radius: 20px;
-    left: 220px;
-    top: 100px;
+    background-color: #F9FAFB;
+    border: 1px solid #d3d5d8;
+    border-width: 1px 1px 0 1px;
+    box-sizing: border-box;
+    left: 15vh;
+    top: 7vh;
 }
 
 .proflie-img {
@@ -173,146 +189,252 @@
     top: 17%;
 }
 
+.profile-category-Notes-frame{
+    position: relative;
+    height: 50px;
+    width: 90%;
+    border: 0;
+    background: none;
+    left: 50%;
+    top: 15%;
+    transform: translate(-50%, -50%);
+}
+.profile-category-Notes-frame h3{
+    position: absolute;
+    background: none;
+    font-weight: 500;
+    text-align: center;
+    top: 50%;
+    left: 10.9%;
+    transform: translate(-50%, -50%);
+}
+
 
 .proflie-category-allNote {
     position: relative;
     height: 50px;
-    width: 225px;
-    border: 2px solid #303030;
-    border-width: 0 0 2px;
-    transform: translate(-50%, -50%);
+    width: 90%;
+    border: 0;
+    border-radius: 10px;
+    background: none;
     left: 50%;
-    top: 15%;
+    top: 16%;
+    transform: translate(-50%, -50%);
+    transition: background-color 0.3s ease;
 }
-.proflie-category-BookMark {
+.profile-category-allNote-img {
+    background: url(images/allNote-img.png);
+    height: 35px;
+    width: 35px;
+}
+.proflie-category-allNote h3{
+    position: absolute;
+    background: none;
+    font-weight: 500;
+    text-align: center;
+    top: 50%;
+    left: 29.5%;
+    transform: translate(-50%, -50%);
+}
+.proflie-category-allNote:hover {
+    background-color: #e0e0e0;
+}
+
+.proflie-category-Bookmark {
     position: relative;
     height: 50px;
-    width: 225px;
-    border: 2px solid #303030;
-    border-width: 0 0 2px;
-    transform: translate(-50%, -50%);
+    width: 90%;
+    border: 0;
+    border-radius: 10px;
+    background: none;
     left: 50%;
-    top: 18%;
+    top: 16%;
+    transform: translate(-50%, -50%);
+    transition: background-color 0.3s ease;
 }
-.proflie-category-Folder {
+.profile-category-Bookmark-img {
+    background: url(images/bookmark-img.png);
+    height: 35px;
+    width: 35px;
+}
+.proflie-category-Bookmark h3{
+    position: absolute;
+    background: none;
+    font-weight: 500;
+    text-align: center;
+    top: 50%;
+    left: 30.3%;
+    transform: translate(-50%, -50%);
+}
+.proflie-category-Bookmark:hover {
+    background-color: #e0e0e0;
+}
+
+
+
+.profile-category-Folder-frame {
     position: relative;
     height: 50px;
-    width: 225px;
-    border: 2px solid #303030;
-    border-width: 0 0 2px;
-    transform: translate(-50%, -50%);
+    width: 90%;
+    border: 0;
+    background: none;
     left: 50%;
-    top: 21%;
+    top: 25%;
+    transform: translate(-50%, -50%);
 }
+.profile-category-Folder-frame h3 {
+    position: absolute;
+    background: none;
+    font-weight: 500;
+    text-align: center;
+    top: 50%;
+    left: 13%;
+    transform: translate(-50%, -50%);
+}
+
+.profile-category-newFolderBnt {
+    position: absolute;
+    top: 53%;
+    left: 92%;
+    transform: translate(-50%, -50%);
+    border: 0;
+}
+.newFolderPlus rect{
+    transition: fill 0.3s;
+}
+.newFolderPlus:hover rect {
+    fill:black;
+}
+
+
+.proflie-category-default-Folder-frame {
+    position: relative;
+    height: 50px;
+    width: 90%;
+    border: 0;
+    border-radius: 10px;
+    background: none;
+    left: 50%;
+    top: 25%;
+    transform: translate(-50%, -50%);
+    transition: background-color 0.3s ease;
+}
+.proflie-category-default-Folder-frame-default-folder-img {
+    background: url(images/default-folder.png);
+    height: 35px;
+    width: 35px;
+}
+
+.proflie-category-default-Folder-frame h3{
+    position: absolute;
+    background: none;
+    font-weight: 500;
+    text-align: center;
+    top: 50%;
+    left: 35%;
+    transform: translate(-50%, -50%);
+}
+.proflie-category-default-Folder-frame:hover {
+    background-color: #e0e0e0;
+}
+
 
 
 .proflie-setting-frame {
     position: absolute;
-    height: 30px;
+    height: 5%;
     width: 100%;
-    border: 1px solid #505050;
-    border-width: 1px 0 0 0;
+    border: 1px solid #d3d5d8;
+    border-width: 1px 0 0;
     opacity: 0.8;
-    bottom: 3%;
+    bottom: 0;
 }
 
 .proflie-setting {
     position: absolute;
-    height: 50px;
-    width: 50px;
-    background: url(images/setting-img.png);
+    height: 40px;
+    width: 40px;
+    background: url(images/setting-img1.png);
     border: none;
     opacity: 0.8;
-    left: 82%;
+    transform: translate(-50%, -50%);
+    right: -5%;
+    top: 50%
 }
-
 .proflie-trash {
     position: absolute;
-    height: 60px;
-    width: 60px;
-    background: url(images/profile-trash-img.png);
+    height: 50px;
+    width: 50px;
+    background: url(images/profile-trash-img1.png);
     border: none;
     transform: translate(-50%, -50%);
     left: 7%;
-    top: 70%;
+    top: 57%;
 }
 
 
 
 .recent-document-frame {
     position: absolute;
-    border: 1px solid black;
-    height: 800px;
-    width: 1100px;
-    transform: translate(-50%, -50%);
-    left: 58%;
-    top: 52.5%;
+    border: 1px solid #d3d5d8;
+    border-width: 1px 1px 0 0;
+    box-sizing: border-box;
+    height: calc(100vh - 7vh);
+    width: 1325px;
+    left: calc(15vh + 300px);
+    top: 7vh;
 }
 
 
 .recent-document-topBar-Container {
     position: absolute;
-    border: 1px solid black;
+    box-sizing: border-box;
     height: 6%;
     width: 100%;
 }
 
 .recent-document-topBar-NoteName {
     position: absolute;
-    border: 1px solid black;
+    /* border: 1px solid #d3d5d8; */
+    /* border-width: 0 1px 1px 0; */
+    box-sizing: border-box;
     height: 100%;
     width: 60%;
 }
 .recent-document-topBar-NoteName h2 {
     position: absolute;
-    top: 13%;
-    left: 10%;
-    font-family: "Gamja Flower", sans-serif;
-    font-weight: 500;
-    font-style: normal;
-    font-size: 25px;
+    top: 50%;
+    left: 15%;
+    transform: translate(-50%, -50%);
+    font-size: 20px;
     color: #303030;
 }
 
 .recent-document-topBar-PostDate {
     position: absolute;
-    border: 1px solid black;
+    /* border: 1px solid #d3d5d8; */
+    /* border-width: 0 0 1px 0; */
+    box-sizing: border-box;
     height: 100%;
     width: 40%;
     right: 0;
 }
 .recent-document-topBar-PostDate h2{
     position: absolute;
-    top: 13%;
+    top: 50%;
     left: 10%;
-    font-family: "Gamja Flower", sans-serif;
-    font-weight: 500;
-    font-style: normal;
-    font-size: 25px;
+    transform: translate(-50%, -50%);
+    font-size: 20px;
     color: #303030;
 }
 
 
 .recent-document-table-Container {
     position: absolute;
-    border: 1px solid black;
     height: 94%;
     width: 100%;
     bottom: 0;
 }
-
-/* .file-list-container {
-    position: absolute;
-    padding: 10px;
-    border: 1px solid black;
-    background-color: #f8f8f8;
-    border-radius: 30px;
-    height: 25%;
-    width: 95%;
-    transform: translate(-50%, -50%);
-    top: 17%;
-    left: 50%;
-} */
 
 #fileList {
     list-style-type: none;
@@ -322,12 +444,11 @@
 
 .file-box { /*최근 파일 리스트 박스*/
     position: relative;
-    /* border: 1px solid #303030; */
     border-radius: 10px;
     padding: 20px;
     margin: 15px 0;
     width: 90%;
-    background-color: #f0f0f0;
+    background-color: #F9FAFB;
     transition: background-color 0.3s ease;
     transform: translate(-50%, -50%);
     left: 50%;
