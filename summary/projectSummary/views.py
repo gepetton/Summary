@@ -171,3 +171,6 @@ def stt_conversion(request):
 #         else:
 #             return HttpResponseBadRequest('파일이 없습니다.')
 #     return HttpResponseBadRequest('잘못된 요청입니다.')
+
+def sub1_page(request): # 일반 노트 페이지 경로 return
+    return render(request, 'sub1.html')

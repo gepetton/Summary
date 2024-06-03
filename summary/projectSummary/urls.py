@@ -11,4 +11,5 @@ urlpatterns = [
     path('gpt/conversion/', views.gpt_conversion, name='gpt_conversion'),
     path('ocr/conversion/', views.ocr_conversion, name='ocr_conversion'),
     path('stt/conversion/', views.stt_conversion, name='stt_conversion'),
+    path('sub1/', views.sub1_page, name='sub1_page'), # 일반 노트 페이지 이동 path
 ]

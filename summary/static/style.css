@@ -9,13 +9,17 @@ body {
     overflow: hidden; /* 스크롤 없앰 */
 }
 
-.font-E {
+.font-E { /* 폰트 */
     font-family: "Mulish", sans-serif;
     font-optical-sizing: auto;
     font-weight: lighter;
     font-style: normal;
+
+    text-align: center;
+    /* transform: translate(-50%, -50%); */
 }
 
+/* 탑 메뉴바 */
 .top-menu-frame {
     position: absolute;
     height: 7vh;
@@ -32,139 +36,134 @@ body {
     color: #2489FF;
 }
 
-.search-box{
-    position: absolute;
-    top : 18px;
-    left : 550px;
-    height: 35px;
-    width: 35px;
-    border-radius: 50%;
-    box-shadow: 5px 5px 30px rgba(0,0,0,.2);
-    transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-}
+    /* 검색창 */
+    .search-box{
+        position: absolute;
+        top : 18px;
+        left : 550px;
+        height: 35px;
+        width: 35px;
+        border-radius: 50%;
+        box-shadow: 5px 5px 30px rgba(0,0,0,.2);
+        transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+    .search-box.active{
+        width: 800px;
+    }
+    .search-box input{
+        width: 100%;
+        height: 100%;
+        border: none;
+        border-radius: 50px;
+        background: #fff;
+        outline: none;
+        padding: 0 60px 0 20px;
+        font-size: 18px;
+        opacity: 0;
+        transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+    .search-box input.active{
+        opacity: 1;
+    }
+    .search-box input::placeholder{
+        color: black;
+    }
+    .search-box .search-icon{
+        position: absolute;
+        right: 0px;
+        top: 50%;
+        transform: translateY(-50%);
+        height: 50px;
+        width: 50px;
+        background: #2489FF;
+        border-radius: 50%;
+        text-align: center;
+        line-height: 50px;
+        font-size: 22px;
+        color: #fff;
+        cursor: pointer;
+        z-index: 1;
+        transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+    .search-box .search-icon.active{
+        right: 5px;
+        height: 50px;
+        line-height: 50px;
+        width: 50px;
+        font-size: 20px;
+        background: #2489FF;
+        color: #fff;
+        transform: translateY(-50%) rotate(360deg);
+    }
+    .search-box .cancel-icon{
+        position: absolute;
+        right: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 25px;
+        color: #5a5a5a;
+        cursor: pointer;
+        transition: all 0.5s 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+    .search-box .cancel-icon.active{
+        right: -40px;
+        transform: translateY(-50%) rotate(360deg);
+    }
+    .search-box .search-data{
+        text-align: center;
+        padding-top: 7px;
+        color: #d3d5d8;
+        font-size: 18px;
+        word-wrap: break-word;
+    }
+    .search-box .search-data.active{
+        display: none;
+    }
+    .fas {
+        background: none;
+    }
 
-.search-box.active{
-    width: 800px;
-}
+    /* 알림(공지) 버튼 */
+    .alarm-img {
+        position: absolute;
+        height: 25px;
+        width: 25px;
+        transform: translate(-50%, -50%);
+        left: calc(15vh + 300px + 1325px - 180px);
+        top: 50%;
+        border: none;
+        background: url(images/alarm-img1.png);
+        opacity: 0.9;
+    }
 
-.search-box input{
-    width: 100%;
-    height: 100%;
-    border: none;
-    border-radius: 50px;
-    background: #fff;
-    outline: none;
-    padding: 0 60px 0 20px;
-    font-size: 18px;
-    opacity: 0;
-    transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-}
-
-.search-box input.active{
-    opacity: 1;
-}
-
-.search-box input::placeholder{
-    color: black;
-}
-  
-.search-box .search-icon{
-    position: absolute;
-    right: 0px;
-    top: 50%;
-    transform: translateY(-50%);
-    height: 50px;
-    width: 50px;
-    background: #2489FF;
-    border-radius: 50%;
-    text-align: center;
-    line-height: 50px;
-    font-size: 22px;
-    color: #fff;
-    cursor: pointer;
-    z-index: 1;
-    transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-}
-
-.search-box .search-icon.active{
-    right: 5px;
-    height: 50px;
-    line-height: 50px;
-    width: 50px;
-    font-size: 20px;
-    background: #2489FF;
-    color: #fff;
-    transform: translateY(-50%) rotate(360deg);
-}
-  
-.search-box .cancel-icon{
-    position: absolute;
-    right: 20px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 25px;
-    color: #fff;
-    cursor: pointer;
-    transition: all 0.5s 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-}
-  
-.search-box .cancel-icon.active{
-    right: -40px;
-    transform: translateY(-50%) rotate(360deg);
-}
-  
-.search-box .search-data{
-    text-align: center;
-    padding-top: 7px;
-    color: #fff;
-    font-size: 18px;
-    word-wrap: break-word;
-}
-  
-.search-box .search-data.active{
-    display: none;
-}
-
-.alarm-img {
-    position: absolute;
-    height: 25px;
-    width: 25px;
-    transform: translate(-50%, -50%);
-    left: calc(15vh + 300px + 1325px - 180px);
-    top: 50%;
-    border: none;
-    background: url(images/alarm-img1.png);
-    opacity: 0.9;
-}
-
-.new-document {
-    position: absolute;
-    height: 50px;
-    width: 145px;
-    border: 0;
-    border-radius: 15px;
-    background-color: #2489FF;
-    left: calc(15vh + 300px + 1325px - 72.5px);
-    top: 50%;
-    transform: translate(-50%, -50%);
-    box-shadow: 30px, 30px, 10px, rgba(0, 0, 0, 25); /*왜 안되냐*/
-    transition: all 0.3s;
-}
-
-.new-document p {
-    font-family: "Gamja Flower", sans-serif;
-    font-weight: 500;
-    font-style: normal;
-    color: #EFEFEF;
-    font-size: 21px;
-    background: none;
-}
-
-.new-document:hover{
-    background-color:#004DFF;
-}
+    /* 새 문서 버튼*/
+    .new-document {
+        position: absolute;
+        height: 50px;
+        width: 145px;
+        border: 0;
+        border-radius: 15px;
+        background-color: #2489FF;
+        left: calc(15vh + 300px + 1325px - 72.5px);
+        top: 50%;
+        transform: translate(-50%, -50%);
+        box-shadow: 30px, 30px, 10px, rgba(0, 0, 0, 25); /*왜 안되냐*/
+        transition: all 0.3s;
+    }
+    .new-document p {
+        font-family: "Gamja Flower", sans-serif;
+        font-weight: 500;
+        font-style: normal;
+        color: #EFEFEF;
+        font-size: 21px;
+        background: none;
+    }
+    .new-document:hover{
+        background-color:#004DFF;
+    }
 
 
+/* 프로필 바*/
 .profile-frame {
     position: absolute;
     height: calc(100vh - 7vh);
@@ -176,204 +175,201 @@ body {
     left: 15vh;
     top: 7vh;
 }
+    .proflie-img {
+        position: relative;
+        height: 200px;
+        width: 200px;
+        border: 2px solid #303030;
+        border-radius: 50%;
+        background: url(images/proflie-img.png);
+        transform: translate(-50%, -50%);
+        left: 50%;
+        top: 17%;
+    }
 
-.proflie-img {
-    position: relative;
-    height: 200px;
-    width: 200px;
-    border: 2px solid #303030;
-    border-radius: 50%;
-    background: url(images/proflie-img.png);
-    transform: translate(-50%, -50%);
-    left: 50%;
-    top: 17%;
-}
+    /* 노트 바*/
+    .profile-category-Notes-frame{
+        position: relative;
+        height: 50px;
+        width: 90%;
+        border: 0;
+        background: none;
+        left: 50%;
+        top: 15%;
+        transform: translate(-50%, -50%);
+    }
+    .profile-category-Notes-frame h3{
+        position: absolute;
+        background: none;
+        font-weight: 500;
+        text-align: center;
+        top: 50%;
+        left: 10.9%;
+        transform: translate(-50%, -50%);
+    }
 
-.profile-category-Notes-frame{
-    position: relative;
-    height: 50px;
-    width: 90%;
-    border: 0;
-    background: none;
-    left: 50%;
-    top: 15%;
-    transform: translate(-50%, -50%);
-}
-.profile-category-Notes-frame h3{
-    position: absolute;
-    background: none;
-    font-weight: 500;
-    text-align: center;
-    top: 50%;
-    left: 10.9%;
-    transform: translate(-50%, -50%);
-}
+    /* 모든 노트 바*/
+    .proflie-category-allNote {
+        position: relative;
+        height: 50px;
+        width: 90%;
+        border: 0;
+        border-radius: 10px;
+        background: none;
+        left: 50%;
+        top: 16%;
+        transform: translate(-50%, -50%);
+        transition: background-color 0.3s ease;
+    }
+    .profile-category-allNote-img {
+        background: url(images/allNote-img.png);
+        height: 35px;
+        width: 35px;
+    }
+    .proflie-category-allNote h3{
+        position: absolute;
+        background: none;
+        font-weight: 500;
+        text-align: center;
+        top: 50%;
+        left: 29.5%;
+        transform: translate(-50%, -50%);
+    }
+    .proflie-category-allNote:hover {
+        background-color: #e0e0e0;
+    }
 
+    /* 북마크 바 */
+    .proflie-category-Bookmark {
+        position: relative;
+        height: 50px;
+        width: 90%;
+        border: 0;
+        border-radius: 10px;
+        background: none;
+        left: 50%;
+        top: 16%;
+        transform: translate(-50%, -50%);
+        transition: background-color 0.3s ease;
+    }
+    .profile-category-Bookmark-img {
+        background: url(images/bookmark-img.png);
+        height: 35px;
+        width: 35px;
+    }
+    .proflie-category-Bookmark h3{
+        position: absolute;
+        background: none;
+        font-weight: 500;
+        text-align: center;
+        top: 50%;
+        left: 30.3%;
+        transform: translate(-50%, -50%);
+    }
+    .proflie-category-Bookmark:hover {
+        background-color: #e0e0e0;
+    }
 
-.proflie-category-allNote {
-    position: relative;
-    height: 50px;
-    width: 90%;
-    border: 0;
-    border-radius: 10px;
-    background: none;
-    left: 50%;
-    top: 16%;
-    transform: translate(-50%, -50%);
-    transition: background-color 0.3s ease;
-}
-.profile-category-allNote-img {
-    background: url(images/allNote-img.png);
-    height: 35px;
-    width: 35px;
-}
-.proflie-category-allNote h3{
-    position: absolute;
-    background: none;
-    font-weight: 500;
-    text-align: center;
-    top: 50%;
-    left: 29.5%;
-    transform: translate(-50%, -50%);
-}
-.proflie-category-allNote:hover {
-    background-color: #e0e0e0;
-}
+    /* 폴더 바 */
+    .profile-category-Folder-frame {
+        position: relative;
+        height: 50px;
+        width: 90%;
+        border: 0;
+        background: none;
+        left: 50%;
+        top: 25%;
+        transform: translate(-50%, -50%);
+    }
+    .profile-category-Folder-frame h3 {
+        position: absolute;
+        background: none;
+        font-weight: 500;
+        text-align: center;
+        top: 50%;
+        left: 13%;
+        transform: translate(-50%, -50%);
+    }
+    /* 새 폴더 버튼 */
+    .profile-category-newFolderBnt {
+        position: absolute;
+        top: 53%;
+        left: 92%;
+        transform: translate(-50%, -50%);
+        border: 0;
+    }
+    .newFolderPlus rect{
+        transition: fill 0.3s;
+    }
+    .newFolderPlus:hover rect {
+        fill:black;
+    }
 
-.proflie-category-Bookmark {
-    position: relative;
-    height: 50px;
-    width: 90%;
-    border: 0;
-    border-radius: 10px;
-    background: none;
-    left: 50%;
-    top: 16%;
-    transform: translate(-50%, -50%);
-    transition: background-color 0.3s ease;
-}
-.profile-category-Bookmark-img {
-    background: url(images/bookmark-img.png);
-    height: 35px;
-    width: 35px;
-}
-.proflie-category-Bookmark h3{
-    position: absolute;
-    background: none;
-    font-weight: 500;
-    text-align: center;
-    top: 50%;
-    left: 30.3%;
-    transform: translate(-50%, -50%);
-}
-.proflie-category-Bookmark:hover {
-    background-color: #e0e0e0;
-}
+    /* 기본 폴더 바 */
+    .proflie-category-default-Folder-frame {
+        position: relative;
+        height: 50px;
+        width: 90%;
+        border: 0;
+        border-radius: 10px;
+        background: none;
+        left: 50%;
+        top: 25%;
+        transform: translate(-50%, -50%);
+        transition: background-color 0.3s ease;
+    }
+    .proflie-category-default-Folder-frame-default-folder-img {
+        background: url(images/default-folder.png);
+        height: 35px;
+        width: 35px;
+    }
+    .proflie-category-default-Folder-frame h3{
+        position: absolute;
+        background: none;
+        font-weight: 500;
+        text-align: center;
+        top: 50%;
+        left: 35%;
+        transform: translate(-50%, -50%);
+    }
+    .proflie-category-default-Folder-frame:hover {
+        background-color: #e0e0e0;
+    }
 
-
-
-.profile-category-Folder-frame {
-    position: relative;
-    height: 50px;
-    width: 90%;
-    border: 0;
-    background: none;
-    left: 50%;
-    top: 25%;
-    transform: translate(-50%, -50%);
-}
-.profile-category-Folder-frame h3 {
-    position: absolute;
-    background: none;
-    font-weight: 500;
-    text-align: center;
-    top: 50%;
-    left: 13%;
-    transform: translate(-50%, -50%);
-}
-
-.profile-category-newFolderBnt {
-    position: absolute;
-    top: 53%;
-    left: 92%;
-    transform: translate(-50%, -50%);
-    border: 0;
-}
-.newFolderPlus rect{
-    transition: fill 0.3s;
-}
-.newFolderPlus:hover rect {
-    fill:black;
-}
-
-
-.proflie-category-default-Folder-frame {
-    position: relative;
-    height: 50px;
-    width: 90%;
-    border: 0;
-    border-radius: 10px;
-    background: none;
-    left: 50%;
-    top: 25%;
-    transform: translate(-50%, -50%);
-    transition: background-color 0.3s ease;
-}
-.proflie-category-default-Folder-frame-default-folder-img {
-    background: url(images/default-folder.png);
-    height: 35px;
-    width: 35px;
-}
-
-.proflie-category-default-Folder-frame h3{
-    position: absolute;
-    background: none;
-    font-weight: 500;
-    text-align: center;
-    top: 50%;
-    left: 35%;
-    transform: translate(-50%, -50%);
-}
-.proflie-category-default-Folder-frame:hover {
-    background-color: #e0e0e0;
-}
-
-
-
-.proflie-setting-frame {
-    position: absolute;
-    height: 5%;
-    width: 100%;
-    border: 1px solid #d3d5d8;
-    border-width: 1px 0 0;
-    opacity: 0.8;
-    bottom: 0;
-}
-
-.proflie-setting {
-    position: absolute;
-    height: 40px;
-    width: 40px;
-    background: url(images/setting-img1.png);
-    border: none;
-    opacity: 0.8;
-    transform: translate(-50%, -50%);
-    right: -5%;
-    top: 50%
-}
-.proflie-trash {
-    position: absolute;
-    height: 50px;
-    width: 50px;
-    background: url(images/profile-trash-img1.png);
-    border: none;
-    transform: translate(-50%, -50%);
-    left: 7%;
-    top: 57%;
-}
+    /* 휴지통 설정 버튼 */
+    .proflie-setting-frame {
+        position: absolute;
+        height: 5%;
+        width: 100%;
+        border: 1px solid #d3d5d8;
+        border-width: 1px 0 0;
+        opacity: 0.8;
+        bottom: 0;
+    }
+    .proflie-setting {
+        position: absolute;
+        height: 40px;
+        width: 40px;
+        background: url(images/setting-img1.png);
+        border: none;
+        opacity: 0.8;
+        transform: translate(-50%, -50%);
+        right: -5%;
+        top: 50%
+    }
+    .proflie-trash {
+        position: absolute;
+        height: 50px;
+        width: 50px;
+        background: url(images/profile-trash-img1.png);
+        border: none;
+        transform: translate(-50%, -50%);
+        left: 7%;
+        top: 57%;
+    }
 
 
-
+/* 최근 파일 프레임*/
 .recent-document-frame {
     position: absolute;
     border: 1px solid #d3d5d8;
@@ -384,106 +380,105 @@ body {
     left: calc(15vh + 300px);
     top: 7vh;
 }
+    /* 노트이름, 크기 등의 요소 바 */
+    .recent-document-topBar-Container {
+        position: absolute;
+        box-sizing: border-box;
+        height: 6%;
+        width: 100%;
+    }
+    .recent-document-topBar-NoteName {
+        position: absolute;
+        /* border: 1px solid #d3d5d8; */
+        /* border-width: 0 1px 1px 0; */
+        box-sizing: border-box;
+        height: 100%;
+        width: 60%;
+    }
+    .recent-document-topBar-NoteName h2 {
+        position: absolute;
+        top: 50%;
+        left: 15%;
+        transform: translate(-50%, -50%);
+        font-size: 20px;
+        color: #303030;
+    }
+    .recent-document-topBar-PostDate {
+        position: absolute;
+        /* border: 1px solid #d3d5d8; */
+        /* border-width: 0 0 1px 0; */
+        box-sizing: border-box;
+        height: 100%;
+        width: 40%;
+        right: 0;
+    }
+    .recent-document-topBar-PostDate h2{
+        position: absolute;
+        top: 50%;
+        left: 10%;
+        transform: translate(-50%, -50%);
+        font-size: 20px;
+        color: #303030;
+    }
 
+    /* 최근 문서 프레임 */
+    .recent-document-table-Container {
+        position: absolute;
+        height: 94%;
+        width: 100%;
+        bottom: 0;
+    }
+    #fileList {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
+    /* 최근 파일 리스트 박스 */
+    .file-box {
+        position: relative;
+        border-radius: 10px;
+        padding: 20px;
+        margin: 15px 0;
+        width: 90%;
+        background-color: #F9FAFB;
+        transition: background-color 0.3s ease;
+        transform: translate(-50%, -50%);
+        left: 50%;
+        top: 50px;
+        cursor: pointer;
+    }
+    .file-box:hover {
+        background-color: #e0e0e0;
+    }
+    .file-box h2 {
+        font-family: "Gamja Flower", sans-serif;
+        font-size: 20px;
+        margin: 0 0 10px 0;
+        background: none;
+    }
+    .file-box p {
+        font-family: "Gamja Flower", sans-serif;
+        font-size: 16px;
+        margin: 0;
+        background: none;
+    }
+    /* 삭제 버튼 */
+    .file-box-delete {
+        position: absolute;
+        background: url(images/delete-img.png);
+        height: 20px;
+        width: 20px;
+        left: 94%;
+        top: 40%;
+        border: 0;
+        opacity: 0.5;
+        transition: opacity 0.3s;
+    }
+    .file-box-delete:hover {
+        opacity: 1;
+    }
 
-.recent-document-topBar-Container {
-    position: absolute;
-    box-sizing: border-box;
-    height: 6%;
-    width: 100%;
-}
-
-.recent-document-topBar-NoteName {
-    position: absolute;
-    /* border: 1px solid #d3d5d8; */
-    /* border-width: 0 1px 1px 0; */
-    box-sizing: border-box;
-    height: 100%;
-    width: 60%;
-}
-.recent-document-topBar-NoteName h2 {
-    position: absolute;
-    top: 50%;
-    left: 15%;
-    transform: translate(-50%, -50%);
-    font-size: 20px;
-    color: #303030;
-}
-
-.recent-document-topBar-PostDate {
-    position: absolute;
-    /* border: 1px solid #d3d5d8; */
-    /* border-width: 0 0 1px 0; */
-    box-sizing: border-box;
-    height: 100%;
-    width: 40%;
-    right: 0;
-}
-.recent-document-topBar-PostDate h2{
-    position: absolute;
-    top: 50%;
-    left: 10%;
-    transform: translate(-50%, -50%);
-    font-size: 20px;
-    color: #303030;
-}
-
-
-.recent-document-table-Container {
-    position: absolute;
-    height: 94%;
-    width: 100%;
-    bottom: 0;
-}
-
-#fileList {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-}
-
-.file-box { /*최근 파일 리스트 박스*/
-    position: relative;
-    border-radius: 10px;
-    padding: 20px;
-    margin: 15px 0;
-    width: 90%;
-    background-color: #F9FAFB;
-    transition: background-color 0.3s ease;
-    transform: translate(-50%, -50%);
-    left: 50%;
-    top: 50px;
-    cursor: pointer;
-}
-
-.file-box:hover {
-    background-color: #e0e0e0;
-}
-
-.file-box h2 {
-    font-family: "Gamja Flower", sans-serif;
-    font-size: 20px;
-    margin: 0 0 10px 0;
-    background: none;
-}
-
-.file-box p {
-    font-family: "Gamja Flower", sans-serif;
-    font-size: 16px;
-    margin: 0;
-    background: none;
-}
-
-.file-box-delete {
-    position: absolute;
-    background: url(images/delete-img.png);
-    height: 20px;
-    width: 20px;
-    left: 94%;
-    top: 40%;
-    border: 0;
-}
-
+/* 모달창. 흐림도 */
 .modal {
     display: none;
     position: fixed;
@@ -495,7 +490,6 @@ body {
     overflow: auto;
     background-color: rgba(0, 0, 0, 0.6); /* 배경 투명도 조절 */
 }
-
 .modal-content  {
     margin: 10% auto; /* 화면 중앙 정렬 */
     padding: 20px;
@@ -504,223 +498,288 @@ body {
     border-radius: 20px;
     background-color: #ffffff; /* 모달 창 배경색을 하얀색으로 설정 */
 }
+    .modal-title {
+        position: relative;
+        left: 3%;
+        top: 1%;
+        text-align: start;
+        font-weight: normal;
+        background: none;
+        font-size: 30px;
+    }
+    /* 파일 업로드 폼 */
+    .uploadForm {
+        position: relative;
+        height: 60%;
+        width: 50%;
+        left: 3%;
+        top: 3%;
+        border-radius: 20px;
+    }
+     /*파일 선택 박스*/
+    .modal-content input {
+        position: relative;
+        height: 100%;
+        width: 100%;
+        background-color: #ececec;
+        border-radius: 20px;
+        transition: all 0.4s;
+    }
+     /*모달 파일 선택 버튼 제거*/
+    .uploadForm input::file-selector-button {
+        display: none;
+    }
+    .modal-content input:hover {
+        background-color: #d8d8d8;
+    }
 
-.modal-content h3 {
-    position: relative;
-    left: 3%;
-    top: 1%;
-    background: none;
-    font-family: "Gamja Flower", sans-serif;
-    font-weight: 500;
-    font-style: normal;
-    font-size: 30px;
-}
+    /* 이 이후 카테고리 버튼 요소 */
+    /* 기능과 설명 섹션 나누는 세로선 */
+    .vertical-line {
+        position: absolute;
+        border: 1px solid black;
+        height: 100%;
+        width: 1px;
+        border-width: 0 1px 0 0;
+        box-sizing: border-box;
+        top: 0;
+        left: 30%;
+    }
+    /* 버튼 카테고리 컨테이너 */
+    .category-Container {
+        position: relative;
+        width: 0;
+        height: 0;
+        border: 0;
+        background: none;
+        top: -56.5%;
+        left: 57.5%;
+    }
+    /* 버튼끼리의 여백 */
+    .category-Container * {
+        margin-bottom: 5px;
+    }
+        /* OCR */
+        .OCRBtn-Container {
+            position: relative;
+            background-color: #f5f5f5;
+            height: 75px;
+            width: 300px;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            box-sizing: border-box;
+            left: 57.5%;
+            top: -57%;
+            transition: background-color 0.3s;
+        }
+        .OCR-name{
+            position: absolute;
+            background: none;
+            top: 50%;
+            left: 15%;
 
-.uploadForm {
-    position: relative;
-    height: 60%;
-    width: 50%;
-    left: 3%;
-    top: 3%;
-    border-radius: 20px;
-}
+            transform: translate(-50%, -50%);
+            font-size: 23px;
+            font-weight: normal;
+        }
+        .OCR-explan {
+            position: absolute;
+            background: none;
+            white-space: nowrap;
+            top: 50%;
+            left: 65%;
+
+            transform: translate(-50%, -50%);
+            font-size: 18px;
+        }
+        .OCRBtn-Container:hover {
+            background: #e0e0e0;
+        }
+        /* STT */
+        .STTBtn-Container {
+            position: relative;
+            background-color: #f5f5f5;
+            height: 75px;
+            width: 300px;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            box-sizing: border-box;
+            left: 57.5%;
+            top: -56%;
+            transition: background-color 0.3s;
+        }
+        .STT-name{
+            position: absolute;
+            background: none;
+            top: 50%;
+            left: 15%;
+
+            transform: translate(-50%, -50%);
+            font-size: 23px;
+            font-weight: normal;
+        }
+        .STT-explan {
+            position: absolute;
+            background: none;
+            white-space: nowrap;
+            top: 50%;
+            left: 65%;
+
+            transform: translate(-50%, -50%);
+            font-size: 18px;
+        }
+        .STTBtn-Container:hover {
+            background: #e0e0e0;
+        }
+
+        /* GPT */
+        .GPTBtn-Container {
+            position: relative;
+            background-color: #f5f5f5;
+            height: 75px;
+            width: 300px;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            box-sizing: border-box;
+            left: 57.5%;
+            top: -55%;
+            transition: background-color 0.3s;
+        }
+        .GPT-name{
+            position: absolute;
+            background: none;
+            top: 50%;
+            left: 15%;
+
+            transform: translate(-50%, -50%);
+            font-size: 23px;
+            font-weight: normal;
+        }
+        .GPT-explan {
+            position: absolute;
+            background: none;
+            white-space: nowrap;
+            top: 50%;
+            left: 65%;
+
+            transform: translate(-50%, -50%);
+            font-size: 18px;
+        }
+        .GPTBtn-Container:hover {
+            background: #e0e0e0;
+        }
+        /* 새노트 */
+        .NoteBtn-Container {
+            position: absolute;
+            background-color: #f5f5f5;
+            height: 75px;
+            width: 300px;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            box-sizing: border-box;
+            left: 57.5%;
+            top: -54%;
+            transition: background-color 0.3s;
+        }
+        .Note-name{
+            position: absolute;
+            background: none;
+            top: 50%;
+            left: 15%;
+
+            transform: translate(-50%, -50%);
+            font-size: 23px;
+            font-weight: normal;
+        }
+        .Note-explan {
+            position: absolute;
+            background: none;
+            white-space: nowrap;
+            top: 50%;
+            left: 65%;
+
+            transform: translate(-50%, -50%);
+            font-size: 18px;
+        }
+        .NoteBtn-Container:hover {
+            background: #e0e0e0;
+        }
+        .sub1-page {
+            position: absolute;
+            display: inline;
+            background: none;
+        }
 
 
-.modal-content input { /*파일 선택 박스*/
-    position: relative;
-    height: 100%;
-    width: 100%;
-    background-color: #ececec;
-    border-radius: 20px;
-    transition: all 0.4s;
-}
+    /*업로드 버튼*/
+    .uploadBtn {
+        position: relative;
+        height: 50px;
+        width: 100px;
+        border: 0;
+        border-radius: 5px;
+        left: 83%;
+        top: 23%;
 
-.uploadForm input::file-selector-button { /*모달 파일 선택 버튼 제거*/
-    display: none;
-}
+        font-family: "Gamja Flower", sans-serif;
+        font-weight: 500;
+        font-style: normal;
+        color: #EFEFEF;
+        font-size: 18px;
 
-.modal-content input:hover { /*파일 선택 박스 효과*/
-    background-color: #d8d8d8;
-}
+        background-color: #2489FF;
+        transition: all 0.3s;
+    }
+    .uploadBtn:hover{
+        background-color:#004DFF;
+    }
 
-.OCRBtn-Container {
-    position: relative;
-    background-color: #f5f5f5;
-    height: 100px;
-    width: 300px;
-    border: 0;
-    border-radius: 10px;
-    left: 57.5%;
-    top: -57%;
-}
-.OCRBtn-Name {
-    position: absolute;
-    background: none;
-    height: 100%;
-    width: 30%;
-    border-width: 0 1px 0 0;
+    /* 취소 버튼 */
+    .modal-cancelBtn {
+        position: relative;
+        height: 50px;
+        width: 100px;
+        border: 0;
+        border-radius: 5px;
+        left: 55%;
+        top: 23%;
 
-    font-family: "Gamja Flower", sans-serif;
-    font-weight: 500;
-    font-style: normal;
-    font-size: 25px;
-}
-.OCRBtn-Type {
-    position: absolute;
-    background: none;
-    height: 100%;
-    width: 70%;
-    border: 0;
-    left: 30%;
+        font-family: "Gamja Flower", sans-serif;
+        font-weight: 500;
+        font-style: normal;
+        color: #3f3f3f;
+        font-size: 18px;
 
-    font-family: "Gamja Flower", sans-serif;
-    font-weight: 500;
-    font-style: normal;
-    font-size: 18px;
-}
+        background-color: #ececec;
+        transition: all 0.3s;
+    }
+    .modal-cancelBtn:hover {
+        background-color: #cecece;
+    }
+    /*세이브 버튼*/
+    .save-btn {
+        position: absolute;
+        height: 40px;
+        width: 70px;
+        border: 0;
+        border-radius: 5px;
+        left: 62%;
+        top: 66%;
 
-.STTBtn-Container {
-    position: relative;
-    background-color: #f5f5f5;
-    height: 100px;
-    width: 300px;
-    border: 0;
-    border-radius: 10px;
-    left: 57.5%;
-    top: -56%;
-}
-.STTBtn-Name {
-    position: absolute;
-    background: none;
-    height: 100%;
-    width: 30%;
-    border-width: 0 1px 0 0;
+        font-family: "Gamja Flower", sans-serif;
+        font-weight: 500;
+        font-style: normal;
+        color: #EFEFEF;
+        font-size: 18px;
 
-    font-family: "Gamja Flower", sans-serif;
-    font-weight: 500;
-    font-style: normal;
-    font-size: 25px;
-}
-.STTBtn-Type {
-    position: absolute;
-    background: none;
-    height: 100%;
-    width: 70%;
-    border: 0;
-    left: 30%;
+        background-color: #2489FF;
+        transition: all 0.3s;
+    }
+    .save-btn:hover {
+        background-color: #004DFF;
+    }
 
-    font-family: "Gamja Flower", sans-serif;
-    font-weight: 500;
-    font-style: normal;
-    font-size: 18px;
-}
-
-.GPTBtn-Container {
-    position: relative;
-    background-color: #f5f5f5;
-    height: 100px;
-    width: 300px;
-    border: 0;
-    border-radius: 10px;
-    left: 57.5%;
-    top: -55%;
-}
-.GPTBtn-Name {
-    position: absolute;
-    background: none;
-    height: 100%;
-    width: 30%;
-    border-width: 0 1px 0 0;
-
-    font-family: "Gamja Flower", sans-serif;
-    font-weight: 500;
-    font-style: normal;
-    font-size: 25px;
-}
-.GPTBtn-Type {
-    position: absolute;
-    background: none;
-    height: 100%;
-    width: 70%;
-    border: 0;
-    left: 30%;
-
-    font-family: "Gamja Flower", sans-serif;
-    font-weight: 500;
-    font-style: normal;
-    font-size: 18px;
-}
-
-
-.uploadBtn { /*업로드 버튼*/
-    position: relative;
-    height: 50px;
-    width: 100px;
-    border: 0;
-    border-radius: 5px;
-    left: 83%;
-    top: -34%;
-
-    font-family: "Gamja Flower", sans-serif;
-    font-weight: 500;
-    font-style: normal;
-    color: #EFEFEF;
-    font-size: 18px;
-    
-    background-color: #2489FF;
-    transition: all 0.3s;
-}
-
-.uploadBtn:hover{
-    background-color:#004DFF;
-}
-
-.modal-cancelBtn { /*파일 업로드창 취소 버튼*/
-    position: relative;
-    height: 50px;
-    width: 100px;
-    border: 0;
-    border-radius: 5px;
-    left: 55%;
-    top: -34%;
-
-    font-family: "Gamja Flower", sans-serif;
-    font-weight: 500;
-    font-style: normal;
-    color: #3f3f3f;
-    font-size: 18px;
-    
-    background-color: #ececec;
-    transition: all 0.3s;
-}
-
-.modal-cancelBtn:hover {
-    background-color: #cecece;
-}
-
-.save-btn { /*세이브 버튼*/
-    position: absolute;
-    height: 40px;
-    width: 70px;
-    border: 0;
-    border-radius: 5px;
-    left: 62%;
-    top: 66%;
-
-    font-family: "Gamja Flower", sans-serif;
-    font-weight: 500;
-    font-style: normal;
-    color: #EFEFEF;
-    font-size: 18px;
-    
-    background-color: #2489FF;
-    transition: all 0.3s;
-}
-
-.save-btn:hover {
-    background-color: #004DFF;
-}
-
+/* FAQ, Q&A */
 .queastion {
     position: absolute;
     background: url(images/queastion_img.png);
@@ -730,4 +789,59 @@ body {
     top: 90%;
     left: 94%;
     opacity: 0.7;
+}
+
+
+
+/* 일반 노트 페이지 (sub1) */
+.top-tools-bar {
+    position: absolute;
+    height: 30px;
+    width: 60%;
+    border: 3px solid #505050;
+    border-radius: 10px;
+    top: 12%;
+    left: 57.2%;
+    padding : 10px;
+
+    font-size: 20px;
+    font-weight: bold;
+
+    transform: translate(-50%, -50%);
+}
+.notes-page{
+    position: absolute;
+    display: inline;
+    height: 80%;
+    width: 60%;
+    border: 2px solid #505050;
+    border-radius: 10px;
+    top: 58%;
+    left: 57.2%;
+    padding : 10px;
+
+    transform: translate(-50%, -50%);
+}
+.save{
+    position: absolute;
+    height: 50px;
+    width: 100px;
+    border: 0;
+    border-radius: 15px;
+    background-color: #2489FF;
+    font-family: "Gamja Flower", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    color: #EFEFEF;
+    font-size: 23px;
+    top : 91.5%;
+    left : 81%;
+    transition: background-color 0.3s;
+}
+.save:hover{
+    background-color: #004DFF;
+}
+.highlight{
+    display: inline;
+    box-shadow: inset 0 -10px 0 #D9FCDB;
 }

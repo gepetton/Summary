@@ -3,6 +3,7 @@ const searchBtn = document.querySelector(".search-icon");
 const cancelBtn = document.querySelector(".cancel-icon");
 const searchInput = document.querySelector("input");
 const searchData = document.querySelector(".search-data");
+// const sub1Link = document.getElementById('sub1-Link'); // Note 버튼
 
 // 검색창 버튼
 searchBtn.onclick =()=>{
@@ -40,9 +41,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const modalCancelBtn = document.getElementById('modal-cancelBtn'); // 취소 버튼
     const saveFileBtn = document.getElementById('saveFileBtn'); // 저장 버튼
     const fileList = document.getElementById('fileList');
-    const gptBtnName = document.getElementById('GPTBtnName'); // GPT 버튼
-    const ocrBtnName = document.getElementById('OCRBtnName'); // OCR 버튼
-    const sttBtnName = document.getElementById('STTBtnName'); // STT 버튼
+    const gptBtn = document.getElementById('GPTBtn'); // GPT 버튼
+    const ocrBtn = document.getElementById('OCRBtn'); // OCR 버튼
+    const sttBtn = document.getElementById('STTBtn'); // STT 버튼
     // 파일 리스트를 가져와 렌더링하는 함수
     function loadFileList() {
         fetch("http://localhost:8000/projectSummary/uploads/list/")
@@ -166,7 +167,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
 
-    gptBtnName.addEventListener('click', () => {
+    gptBtn.addEventListener('click', () => {
         const formData = new FormData(document.getElementById('uploadForm'));
         fetch('http://localhost:8000/projectSummary/gpt/conversion/', {
             method: 'POST',
@@ -189,7 +190,7 @@ document.addEventListener('DOMContentLoaded', () => {
     })
 
     // OCR 버튼 클릭 시 OCR 처리를 수행하는 함수
-    ocrBtnName.addEventListener('click', () => {
+    ocrBtn.addEventListener('click', () => {
         const formData = new FormData(document.getElementById('uploadForm'));
         fetch('http://localhost:8000/projectSummary/ocr/conversion/', {
             method: 'POST',
@@ -218,7 +219,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // STT 버튼 클릭 시 STT 변환을 수행하는 함수
-    sttBtnName.addEventListener('click', () => {
+    sttBtn.addEventListener('click', () => {
         const formData = new FormData(document.getElementById('uploadForm'));
         fetch('http://localhost:8000/projectSummary/stt/conversion/', {
             method: 'POST',
@@ -310,6 +311,11 @@ function getCookie(name) {
     }
     return cookieValue;
 }
+
+// sub1Link.onclick = function() {
+//     location.href = "{% url 'sub1_page' %}";
+//     console.log("good");
+// };
 
 function formatFileSize(bytes) {
     const kb = bytes / 1024;
