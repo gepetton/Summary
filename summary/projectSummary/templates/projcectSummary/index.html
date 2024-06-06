@@ -91,7 +91,9 @@
                     <div class="modal" id="fileModal">
                         <div class="modal-content"> <!-- 파일 정보 -->
                             <h3 class="file-ModalTitle" id="fileModalTitle">File Content</h3>
-                            <div id="fileContent" contenteditable="true"></div>
+                            <div class="fileContents-Container">
+                                <div id="fileContent" contenteditable="true"></div>
+                            </div>
                             <form id="saveForm" enctype="multipart/form-data"> <!-- 세이브 버튼. !!현재 오류!! -->
                                 <button class="save-btn" id="saveFileBtn">Save</button>
                             </form>

@@ -34,6 +34,7 @@ body {
     left: 290px;
     top: 50%;
     color: #2489FF;
+    /* color: rgb(39, 39, 39); */
 }
 
     /* 검색창 */
@@ -126,14 +127,21 @@ body {
     /* 알림(공지) 버튼 */
     .alarm-img {
         position: absolute;
-        height: 25px;
-        width: 25px;
+        height: 40px;
+        width: 40px;
         transform: translate(-50%, -50%);
         left: calc(15vh + 300px + 1325px - 180px);
         top: 50%;
         border: none;
+        border-radius: 50%;
         background: url(images/alarm-img1.png);
+        background-repeat: no-repeat;
+        background-position: center; /* 사진 위치 정중앙 */
         opacity: 0.9;
+        transition: background-color 0.3s;
+    }
+    .alarm-img:hover {
+        background-color: #ececec;
     }
 
     /* 새 문서 버튼*/
@@ -179,7 +187,7 @@ body {
         position: relative;
         height: 200px;
         width: 200px;
-        border: 2px solid #303030;
+        border: 2px solid #d3d5d8;
         border-radius: 50%;
         background: url(images/proflie-img.png);
         transform: translate(-50%, -50%);
@@ -424,6 +432,7 @@ body {
     /* 최근 문서 프레임 */
     .recent-document-table-Container {
         position: absolute;
+        overflow: auto;
         height: 94%;
         width: 100%;
         bottom: 0;
@@ -498,6 +507,15 @@ body {
     border-radius: 20px;
     background-color: #ffffff; /* 모달 창 배경색을 하얀색으로 설정 */
 }
+    .fileContents-Container {
+        position: relative;
+        overflow: auto;
+        height: 80%;
+        width: 100%;
+        background: none;
+        border: 0;
+        top: 0;
+    }
     .modal-title {
         position: relative;
         left: 3%;
@@ -763,8 +781,8 @@ body {
         width: 70px;
         border: 0;
         border-radius: 5px;
-        left: 62%;
-        top: 66%;
+        left: 65%;
+        top: 71%;
 
         font-family: "Gamja Flower", sans-serif;
         font-weight: 500;
@@ -797,12 +815,13 @@ body {
 .top-tools-bar {
     position: absolute;
     height: 30px;
-    width: 60%;
+    width: 65%;
     border: 3px solid #505050;
     border-radius: 10px;
     top: 12%;
     left: 57.2%;
     padding : 10px;
+    overflow: auto;
 
     font-size: 20px;
     font-weight: bold;
@@ -813,12 +832,13 @@ body {
     position: absolute;
     display: inline;
     height: 80%;
-    width: 60%;
+    width: 65%;
     border: 2px solid #505050;
     border-radius: 10px;
     top: 58%;
     left: 57.2%;
     padding : 10px;
+    overflow: auto;
 
     transform: translate(-50%, -50%);
 }
