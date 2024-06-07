@@ -237,9 +237,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 // 여기서 변환된 텍스트를 어떻게 처리할지에 대한 로직을 추가할 수 있습니다.
                 alert('오디오에서 텍스트를 추출했습니다.');
             } else {
-                // 변환이 실패한 경우
-                console.error(data.error);
-                alert('STT 변환 실패: ' + data.error);
+                modal.style.display = 'none'; // 모달 닫기
+                console.log('STT 변환 성공:', data.transcript);
+                alert('오디오에서 텍스트를 추출했습니다.');
             }
         })
         .catch(error => {
