@@ -852,7 +852,7 @@ body {
     background-color: #F9FAFB;
     border-radius: 10px;
     top: 12%;
-    left: 57.2%;
+    left: 59.2%;
     padding : 10px;
     overflow: auto;
 
@@ -870,11 +870,14 @@ body {
     background-color: #F9FAFB;
     border-radius: 10px;
     top: 53%;
-    left: 57.2%;
+    left: 59.2%;
     padding : 10px;
     overflow: auto;
 
     transform: translate(-50%, -50%);
+}
+.notes-page * {
+    background: none;
 }
 .save{
     position: absolute;
@@ -889,7 +892,7 @@ body {
     color: #EFEFEF;
     font-size: 23px;
     top : 91.5%;
-    left : 85%;
+    left : 87%;
     transition: background-color 0.3s;
 }
 .save:hover{
