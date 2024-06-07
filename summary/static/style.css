@@ -28,13 +28,41 @@ body {
     border-width: 0 0 1px;
 }
 
-.top-menu-frame h2 {
+.log-Container {
+    position: absolute;
+    height: 50px;
+    width: 200px;
+    border: 0;
+
+    background: none;
+    transform: translate(-50%, -50%);
+
+    left: 303px;
+    top: 48%;
+    
+}
+
+.mainLog-img {
+    position: absolute;
+    height: 40px;
+    width: 40px;
+    border: 0;
+
+    background: url(images/mainLog-img.png);
+    transform: translate(-50%, -50%);
+
+    left: 10%;
+    top: 54%;
+
+    opacity: 0.9;
+}
+
+.log-Container h2 {
     position: absolute;
     transform: translate(-50%, -50%);
-    left: 290px;
+    left: 50%;
     top: 50%;
     color: #2489FF;
-    /* color: rgb(39, 39, 39); */
 }
 
     /* 검색창 */
@@ -116,6 +144,10 @@ body {
         color: #d3d5d8;
         font-size: 18px;
         word-wrap: break-word;
+        background: none;
+    }
+    .search-data span {
+        background: none;
     }
     .search-box .search-data.active{
         display: none;
@@ -816,7 +848,8 @@ body {
     position: absolute;
     height: 30px;
     width: 65%;
-    border: 3px solid #505050;
+    border: 3px solid #e0e0e0;
+    background-color: #F9FAFB;
     border-radius: 10px;
     top: 12%;
     left: 57.2%;
@@ -831,11 +864,12 @@ body {
 .notes-page{
     position: absolute;
     display: inline;
-    height: 80%;
+    height: 70%;
     width: 65%;
-    border: 2px solid #505050;
+    border: 2px solid #e0e0e0;
+    background-color: #F9FAFB;
     border-radius: 10px;
-    top: 58%;
+    top: 53%;
     left: 57.2%;
     padding : 10px;
     overflow: auto;
@@ -855,7 +889,7 @@ body {
     color: #EFEFEF;
     font-size: 23px;
     top : 91.5%;
-    left : 81%;
+    left : 85%;
     transition: background-color 0.3s;
 }
 .save:hover{
